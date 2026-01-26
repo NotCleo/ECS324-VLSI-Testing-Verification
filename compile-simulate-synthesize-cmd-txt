@@ -1,0 +1,15 @@
+iverilog *.v -o sim
+vvp sim
+gtkwave <whatever was in the testbench>.vcd
+read_verilog <whatever>.v
+hierarchy -check -top <topmodulename>
+read_verilog -lib cmos_cells.v 
+synth
+dfflibmap -liberty cmos_cells.lib
+abc -liberty cmos_cells.lib 
+opt_clean
+write_verilog synth.v 
+exit
+
+
+
