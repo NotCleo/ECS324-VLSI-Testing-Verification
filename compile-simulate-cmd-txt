@@ -1,0 +1,8 @@
+iverilog *.v -o sim
+
+vvp sim
+
+gtkwave <whatever was in the testbench>.vcd
+
+
+
