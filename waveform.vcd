@@ -1,0 +1,129 @@
+$date
+	Mon Jan 26 22:56:43 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module half_adder_scan_tb $end
+$var wire 1 ! sum $end
+$var wire 1 " scan_out $end
+$var wire 1 # carry $end
+$var reg 1 $ a_in $end
+$var reg 1 % b_in $end
+$var reg 1 & clk $end
+$var reg 1 ' rst_n $end
+$var reg 1 ( scan_en $end
+$var reg 1 ) scan_in $end
+$scope module dut $end
+$var wire 1 $ a_in $end
+$var wire 1 % b_in $end
+$var wire 1 # carry $end
+$var wire 1 & clk $end
+$var wire 1 ' rst_n $end
+$var wire 1 ( scan_en $end
+$var wire 1 ) scan_in $end
+$var wire 1 " scan_out $end
+$var wire 1 ! sum $end
+$var reg 1 * a_ff $end
+$var reg 1 + b_ff $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+0+
+0*
+0)
+0(
+0'
+0&
+0%
+0$
+0#
+0"
+0!
+$end
+#5000
+1&
+#10000
+0&
+#12000
+1)
+1(
+1'
+#15000
+1!
+1*
+1&
+#20000
+0&
+#22000
+0)
+#25000
+1"
+1+
+0*
+1&
+#30000
+0&
+#32000
+0(
+#35000
+0!
+0"
+0+
+1&
+#40000
+0&
+#45000
+1&
+#50000
+0&
+#55000
+1&
+#60000
+0&
+#62000
+1%
+#65000
+1!
+1"
+1+
+1&
+#70000
+0&
+#72000
+0%
+1$
+#75000
+0"
+0+
+1*
+1&
+#80000
+0&
+#82000
+1%
+#85000
+1#
+0!
+1"
+1+
+1&
+#90000
+0&
+#95000
+1&
+#100000
+0&
+#105000
+1&
+#110000
+0&
+#112000
