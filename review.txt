@@ -1,0 +1,7 @@
+1) We can now proceed with an image filtering accelerator 
+
+
+2) Regarding the kernel multiplication speedup we can move on to the fpga's systolic array implementation for accelerating the kernel operations 
+
+
+3) We then move on to the fault/testing and then implement it on fpga to do timing benchmark
