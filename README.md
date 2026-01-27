@@ -3,6 +3,8 @@
 
 
 (note to self : iverilog and gtkwave sits at ~/Documents (not to be confused with verilator))
+
+
 Tool #1 : Icarus Verilog (Compilation)
 
     Installation : sudo apt install iverilog
