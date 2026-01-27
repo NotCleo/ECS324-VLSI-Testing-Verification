@@ -28,6 +28,23 @@ Tool #3 : Yosys (Synthesis)
 
     cd into /examples/cmos
 
+    find . -type f -name "*.synth" (if a .ys file with all process laid out exists for instance refer below : 
+
+    read_verilog scan_counter.v sdff.v
+
+    hierarchy -check -top <top module name>
+    
+    proc
+    opt
+    techmap
+    synth -top <top module name>
+    write_verilog <output file name>.v
+    write_blif synthesized.blif
+    
+    show -prefix scan_proof -format dot
+
+    )
+
 
     read_verilog <whatever>.v
     hierarchy -check -top <topmodulename>
@@ -38,6 +55,50 @@ Tool #3 : Yosys (Synthesis)
     opt_clean
     write_verilog synth.v 
     exit
+
+
+Tool #4 : Atalanta (ATPG)
+
+    Installation procedure : 
+    cd ~/ 
+    git clone https://github.com/hsluoyz/Atalanta.git
+    cd Atalanta
+    make
+    cd ..
+    mkdir bin
+    cp /Atalanta/atalanta /bin
+    add $PATH to ~/.bashrc 
+    source ~/.bashrc 
+    cd Atalanta 
+    atalanta -h
+
+    
+
+    To run ATPG
+
+    Perform cd into /home/amrut/Atalanta
+    vim a bench file and on top always add a #
+    atalanta -h
+    atalanta -t <whatever>.test -v <whatever>.bench
+    Read the ufaults file, vec file, bench file, test file
+    Draw the circuit
+    Compare the ufaults file with the circuits
+    HUH
+
+
+    To add a stuck at fault and run fault coverage: 
+
+    EXAMPLE OF .FLT FILE IS
+
+    “
+    1 /0 -> means at net 1 it is stuck at 0
+    
+    “
+
+    atalanta -f <name of stuck at fault file>.flt -t <output file name>.test -v <netlist translated to a bench file name>.bench 
+
+
+
 
 
 
