@@ -98,6 +98,16 @@ Tool #4 : Atalanta (ATPG)
     atalanta -f <name of stuck at fault file>.flt -t <output file name>.test -v <netlist translated to a bench file name>.bench 
 
 
+    issue with using ffs with atalanta is this ; 
+    """"    
+    before
+    after
+    Error: 2 flip-flop exists in the circuit.
+    Fatal error:  Error in circuit file
+    """"
+
+    Therefore proving that we cannot do scan chain ATPGs on this tool
+    
 
 
 
