@@ -48,7 +48,8 @@ Tool #4 : Yosys (Synthesis)
 
     cd into /examples/cmos
 
-    find . -type f -name "*.synth" (if a .ys file with all process laid out exists for instance refer below : 
+    find . -type f -name "*.synth" 
+    (if a .ys file with all process laid out exists for instance refer below : 
 
     read_verilog scan_counter.v sdff.v
 
