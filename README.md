@@ -14,15 +14,35 @@ Tool #2 : GTKWave (Simulation)
 
     Installation : sudo apt install gtkwave
 
-Working Flow : 
-1) Write a design file in verilog
-2) Write a testbench for the design file in verilog
-3) Compile using iverilog -> iverilog design.v tb.v -o sim
-4) Run the waveform dumpfile -> vvp sim
-5) Run the simulation -> gtkwave <whatever>.vcd
+        Working Flow : 
+        1) Write a design file in verilog
+        2) Write a testbench for the design file in verilog
+        3) Compile using iverilog -> iverilog design.v tb.v -o sim
+        4) Run the waveform dumpfile -> vvp sim
+        5) Run the simulation -> gtkwave <whatever>.vcd
+
+Tool #3 : Fault (DFT + ATPG)
+
+    Installation :
+
+     mkdir fault_environment
+     cd fault_environment
+     python3 -m venv venv
+     source venv/bin/activate
+     pip install fault-dft
+     fault --help
+     git clone https://github.com/AUCOHL/Fault.git
+     cd Fault/Tech/osu035/
+     vim <design file>.v
+     fault synth -t <top module name> -l osu035_stdcells.lib -o <output netlist name>.netlist.v <design file name>.v
+     fault cut --clock clk --reset rst_n --activeLow -o <output file name>.cut.v <output netlist name>.netlist.v
+     fault -g swift -c osu035_stdcells.v -v 100 <output file name>.cut.v --clock clk --reset rst_n --activeLow
+     fault -c osu035_stdcells.v -v 100 hadder.cut.v --clock clk --reset rst_n --activeLow
+     cat *.json
 
 
-Tool #3 : Yosys (Synthesis)
+
+Tool #4 : Yosys (Synthesis)
 
     Installation : sudo apt install yosys
 
@@ -57,7 +77,7 @@ Tool #3 : Yosys (Synthesis)
     exit
 
 
-Tool #4 : Atalanta (ATPG)
+Tool #5 : Atalanta (ATPG)
 
     Installation procedure : 
     cd ~/ 
