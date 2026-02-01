@@ -1,14 +1,15 @@
 # ECS324-VLSI-Testing-Verification
 
-
-
 (note to self : iverilog and gtkwave sits at ~/Documents (not to be confused with verilator))
 
+---
 
 Tool #1 : Icarus Verilog (Compilation)
 
-    Installation : sudo apt install iverilog
+    Installation : 
+        sudo apt install iverilog
 
+---
 
 Tool #2 : GTKWave (Simulation)
 
@@ -20,6 +21,8 @@ Tool #2 : GTKWave (Simulation)
         3) Compile using iverilog -> iverilog design.v tb.v -o sim
         4) Run the waveform dumpfile -> vvp sim
         5) Run the simulation -> gtkwave <whatever>.vcd
+
+---
 
 Tool #3 : Fault (DFT + ATPG)
 
@@ -40,94 +43,210 @@ Tool #3 : Fault (DFT + ATPG)
      fault -c osu035_stdcells.v -v 100 hadder.cut.v --clock clk --reset rst_n --activeLow
      cat *.json
 
-
+---
 
 Tool #4 : Yosys (Synthesis)
 
-    Installation : sudo apt install yosys
-
-    cd into /examples/cmos
-
-    find . -type f -name "*.synth" 
-    (if a .ys file with all process laid out exists for instance refer below : 
-
-    read_verilog scan_counter.v sdff.v
-
-    hierarchy -check -top <top module name>
+    Installation : 
     
-    proc
-    opt
-    techmap
-    synth -top <top module name>
-    write_verilog <output file name>.v
-    write_blif synthesized.blif
+        sudo apt install yosys
     
-    show -prefix scan_proof -format dot
+        cd into /examples/cmos
+    
+        find . -type f -name "*.synth" 
+        (if a .ys file with all process laid out exists for instance refer below : 
+    
+        read_verilog scan_counter.v sdff.v
+    
+        hierarchy -check -top <top module name>
+        
+        proc
+        opt
+        techmap
+        synth -top <top module name>
+        write_verilog <output file name>.v
+        write_blif synthesized.blif
+        
+        show -prefix scan_proof -format dot
+    
+        )
+    
+    
+        read_verilog <whatever>.v
+        hierarchy -check -top <topmodulename>
+        read_verilog -lib cmos_cells.v 
+        synth
+        dfflibmap -liberty cmos_cells.lib
+        abc -liberty cmos_cells.lib 
+        opt_clean
+        write_verilog synth.v 
+        exit
 
-    )
-
-
-    read_verilog <whatever>.v
-    hierarchy -check -top <topmodulename>
-    read_verilog -lib cmos_cells.v 
-    synth
-    dfflibmap -liberty cmos_cells.lib
-    abc -liberty cmos_cells.lib 
-    opt_clean
-    write_verilog synth.v 
-    exit
-
+---
 
 Tool #5 : Atalanta (ATPG)
 
     Installation procedure : 
-    cd ~/ 
-    git clone https://github.com/hsluoyz/Atalanta.git
-    cd Atalanta
-    make
-    cd ..
-    mkdir bin
-    cp /Atalanta/atalanta /bin
-    add $PATH to ~/.bashrc 
-    source ~/.bashrc 
-    cd Atalanta 
-    atalanta -h
+        cd ~/ 
+        git clone https://github.com/hsluoyz/Atalanta.git
+        cd Atalanta
+        make
+        cd ..
+        mkdir bin
+        cp /Atalanta/atalanta /bin
+        add $PATH to ~/.bashrc 
+        source ~/.bashrc 
+        cd Atalanta 
+        atalanta -h
 
     
 
     To run ATPG
 
-    Perform cd into /home/amrut/Atalanta
-    vim a bench file and on top always add a #
-    atalanta -h
-    atalanta -t <whatever>.test -v <whatever>.bench
-    Read the ufaults file, vec file, bench file, test file
-    Draw the circuit
-    Compare the ufaults file with the circuits
-    HUH
-
-
-    To add a stuck at fault and run fault coverage: 
-
-    EXAMPLE OF .FLT FILE IS
-
-    “
-    1 /0 -> means at net 1 it is stuck at 0
+        Perform cd into /home/amrut/Atalanta
+        vim a bench file and on top always add a #
+        atalanta -h
+        atalanta -t <whatever>.test -v <whatever>.bench
+        Read the ufaults file, vec file, bench file, test file
+        Draw the circuit
+        Compare the ufaults file with the circuits
+        HUH
     
-    “
+    
+        To add a stuck at fault and run fault coverage: 
+    
+        EXAMPLE OF .FLT FILE IS
+    
+        “
+        1 /0 -> means at net 1 it is stuck at 0
+        
+        “
+    
+        atalanta -f <name of stuck at fault file>.flt -t <output file name>.test -v <netlist translated to a bench file name>.bench 
+    
+    
+        issue with using ffs with atalanta is this ; 
+        """"    
+        before
+        after
+        Error: 2 flip-flop exists in the circuit.
+        Fatal error:  Error in circuit file
+        """"
+    
+        Therefore proving that we cannot do scan chain ATPGs on this tool
 
-    atalanta -f <name of stuck at fault file>.flt -t <output file name>.test -v <netlist translated to a bench file name>.bench 
+---
+
+Tool #6 : OpenLane (RTL to GDS)
+
+    Installation :
+        First time installation and run : 
+            in terminal window 1 : 
+                sudo apt update
+                sudo apt install docker.io
+                sudo systemctl start docker
+                sudo systemctl enable docker
+                sudo usermod -aG docker $USER
+                newgrp docker
+                git clone --depth 1 https://github.com/The-OpenROAD-Project/OpenLane.git
+                cd OpenLane
+                make
+                make mount
 
 
-    issue with using ffs with atalanta is this ; 
-    """"    
-    before
-    after
-    Error: 2 flip-flop exists in the circuit.
-    Fatal error:  Error in circuit file
-    """"
+            in terminal window 2 : 
+                cd OpenLane/designs
+                mkdir -p <whatever>/src
+                vim <whatever>/src/<whatever>.v
+                cd ..
+                vim <whatever>/config.json
 
-    Therefore proving that we cannot do scan chain ATPGs on this tool
+
+                    {
+                    
+                        "DESIGN_NAME": "<whatever>",
+                    
+                        "VERILOG_FILES": "dir::src/<whatever>.v",
+                    
+                        "CLOCK_PORT": "clk",
+                    
+                        "CLOCK_PERIOD": 10.0,
+                    
+                        "FP_SIZING": "absolute",
+                    
+                        "DIE_AREA": "0 0 50 50",
+                    
+                        "PL_TARGET_DENSITY": 0.50
+                    
+                    }
+
+
+            in terminal window 1 : 
+
+                ./flow.tcl -design <whatever>
+                klayout OpenLane/designs/whatever/runs/*/results/final/gds/<whatever>.gds 
+
+            To see analysis (metrics) : 
+
+                metrics.csv lies in /OpenLane/designs/half_adder_scan/runs/RUN_2026.02.01_16.39.58/reports
+
+                Look at column critical_path_ns in the CSV. it would be <something>
+                CLOCK_PERIOD is <as defined in config.json>.
+                Slack = <as defined in config.json> - <something>
+
+
+            For fresh run :
+
+            in terminal window 1 : 
+            
+                cd ~/OpenLane/designs
+                mkdir -p <whatever>/src
+                vim <whatever>/src/<whatever>.v
+                cd ..
+                vim <whatever>/config.json
+                
+                    {
+                    
+                        "DESIGN_NAME": "<whatever>",
+                    
+                        "VERILOG_FILES": "dir::src/<whatever>.v",
+                    
+                        "CLOCK_PORT": "clk",
+                    
+                        "CLOCK_PERIOD": 10.0,
+                    
+                        "FP_SIZING": "absolute",
+                    
+                        "DIE_AREA": "0 0 60 60",
+                    
+                        "PL_TARGET_DENSITY": 0.50
+                    
+                    }
+
+
+            in terminal window 2 : 
+            
+                cd ~/OpenLane
+                make mount
+                ./flow.tcl -design <whatever>
+                klayout ~/OpenLane/designs/<whatever>/runs/*/results/final/gds/<whatever>.gds
+                                            
+                    
+    
+---
+    
+     
+
+Tool #7 : klayout
+
+    Installation :
+        sudo apt install klayout
+        klayout <whatever>.gds 
+        
+
+
+---
+     
     
 
 
