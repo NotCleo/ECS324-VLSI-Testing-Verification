@@ -55,6 +55,93 @@ Tool #3 : Fault (DFT + ATPG)
 
     This turns a difficult "Sequential Circuit" into a much easier "Combinational Circuit" so the tool can mathematically calculate the test patterns.
 
+
+    Alright four ways here : 
+
+    Note : we cannot perform "Scan Chain Insertion" on a purely Combinational Circuit (like a Half Adder) unless you add Flip-Flops to it first.
+
+    Why? A Scan Chain is literally a chain of Shift Registers (Flip-Flops). If your Half Adder has no Flip-Flops (only AND/XOR gates), there is nothing to chain together.
+
+    The Industry Standard: For pure combinational blocks, we simply apply patterns to the inputs. We don't "scan" them unless they are wrapped in Flip-Flops (Registers).
+
+     1) To add scan chain manually (for combinational circuit) : 
+
+         Read above Note!!
+         However, 
+
+         Since a Half Adder has no memory, we must manually wrap the inputs and outputs in Flip-Flops to make it a "Registered Half Adder." Then, we manually modify those Flip-Flops to be scannable.
+
+         Workflow:
+
+            Synthesize (fault synth).
+        
+            SKIP fault chain (because you already built the chain manually!).
+        
+            Run fault cut (to break the FFs for testing).
+        
+            Run fault atpg.
+
+         Why do this? To test the adder inside a larger pipeline.
+
+    2) To add scan chain via Fault (for combinational circuit) : 
+
+    Let' say , you have a plain Half Adder. You want Fault to handle the testing.
+
+    The Catch: fault chain will fail or do nothing because there are no Flip-Flops to replace.
+
+    The Solution: You generally do not insert scan chains here. You skip directly to ATPG.
+
+    How to do it:
+
+            RTL: Pure Half Adder (No clk, no FFs).
+        
+            Synth: fault synth ...
+        
+            Chain: SKIP THIS. (Nothing to chain).
+        
+            Cut: SKIP THIS. (No loops/FFs to cut).
+        
+            ATPG: Run fault atpg directly. The tool will just generate vectors
+        
+
+
+    3) To add scan chain manually (for sequential circuit) : 
+
+        Kinda lame to do via this approach but... Let's take 4 bit up counter
+
+        Concept: You will have to write the "Shift Register" logic yourself inside the counter.
+
+        Difficulty: Pretty High. Cause you have to manually connect Q[0] to Q[1], Q[1] to Q[2], etc., using if(scan_en) statements.
+
+        Workflow:
+        
+            Synthesize (fault synth).
+        
+            SKIP fault chain (You did it manually).
+        
+            Run fault cut (Required).
+        
+            Run fault atpg.
+
+    4) To add scan chain via Fault (for sequential circuit) : 
+
+        The best thing!!
+
+        Run the Full Flow:
+
+            Synth: fault synth -t counter -l osu035.lib -o netlist.v counter.v
+
+                Result: Netlist with normal D-Flip-Flops.
+
+            Chain: fault chain netlist.v --clock clk --reset rst --liberty osu035.lib -o scanned.v
+
+                Result: The tool rips out D-Flip-Flops, puts in Scan-Flip-Flops, and wires Q[0]->SI[1].
+
+            Cut: fault cut scanned.v --clock clk -o cut.v
+
+                Result: Prepares for ATPG.
+
+            ATPG: fault atpg cut.v ...
 ---
 
 Tool #4 : Yosys (Synthesis)
