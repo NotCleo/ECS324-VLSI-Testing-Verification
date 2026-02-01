@@ -43,6 +43,18 @@ Tool #3 : Fault (DFT + ATPG)
      fault -c osu035_stdcells.v -v 100 hadder.cut.v --clock clk --reset rst_n --activeLow
      cat *.json
 
+    Regarding Cut,
+
+    ATPG (Automatic Test Pattern Generation) tools struggle with loops. A Flip-Flop creates a loop (state) because the output depends on the previous input.
+
+        The "Cut" command virtually removes the Flip-Flops from the circuit.
+    
+        It treats the Output of the Flip-Flop as a new Input for the logic.
+    
+        It treats the Input of the Flip-Flop as a new Output for the logic.
+
+    This turns a difficult "Sequential Circuit" into a much easier "Combinational Circuit" so the tool can mathematically calculate the test patterns.
+
 ---
 
 Tool #4 : Yosys (Synthesis)
