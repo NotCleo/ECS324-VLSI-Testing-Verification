@@ -3,7 +3,7 @@
 (note to self : iverilog and gtkwave sits at ~/Documents (not to be confused with verilator))
 
 ---
-
+```bash
 Tool #1 : Icarus Verilog (Compilation)
 
     Installation : 
