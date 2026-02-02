@@ -142,6 +142,104 @@ Tool #3 : Fault (DFT + ATPG)
                 Result: Prepares for ATPG.
 
             ATPG: fault atpg cut.v ...
+
+
+        Extra Notes about flags utilized : 
+
+        (venv) amrut@Maverick:~/fault_environment$ fault chain --help
+        OVERVIEW: Manipulate a netlist to create a scan chain, and resynthesize.
+        
+        USAGE: fault chain [<options>] --liberty <liberty> --clock <clock> <file>
+        
+        ARGUMENTS:
+          <file>
+        
+        OPTIONS:
+          -o, --output <output>   Path to the output file. (Default: input + .chained.v)
+          -c, --cell-model, --cellModel <cell-model>
+                                  Verify scan chain using given cell model.
+          --inv-clock <inv-clock> Inverted clk tree source cell name. (Default: none)
+          -l, --liberty <liberty> Liberty file. (Required.)
+          --bypassing <bypassing> Inputs to bypass when performing operations. May be
+                                  specified multiple times to bypass multiple inputs.
+                                  Will be held high during simulations by default,
+                                  unless =0 is appended to the option.
+          --clock <clock>         Clock name. In addition to being bypassed for certain
+                                  manipulation operations, during simulations it will
+                                  always be held high.
+          --reset <reset>         Reset name. In addition to being bypassed for certain
+                                  manipulation operations, during simulations it will
+                                  always be held low. (default: rst)
+          --reset-active-low, --activeLow
+                                  The reset signal is considered active-low insted, and
+                                  will be held high during simulations.
+          -s, --scl-config, --sclConfig <scl-config>
+                                  Path for the YAML SCL config file. Recommended.
+          -d, --dff <dff>         Optional override for the DFF names from the PDK
+                                  config. Comma-delimited.
+          -b, --blackbox <blackbox>
+                                  Blackbox module names. Comma-delimited. (Default:
+                                  none)
+          -B, --blackbox-models, --blackboxModel <blackbox-models>
+                                  Files containing definitions for blackbox models.
+                                  Comma-delimited. (Default: none)
+          -D, --define <define>   define statements to include during simulations.
+                                  Comma-delimited. (Default: none)
+          --inc <inc>             Extra verilog models to include during simulations.
+                                  Comma-delimited. (Default: none)
+          --skip-synth            Skip Re-synthesizing the chained netlist. (Default:
+                                  none)
+          --sin <sin>             Name for scan-chain serial data in signal. (default:
+                                  sin)
+          --sout <sout>           Name for scan-chain serial data out signal. (default:
+                                  sout)
+          --shift <shift>         Name for scan-chain shift enable signal. (default:
+                                  shift)
+          --test <test>           Name for scan-chain test enable signal. (default:
+                                  test)
+          --tck <tck>             Name for JTAG test clock signal. (default: tck)
+          --version               Show the version.
+          -h, --help              Show help information.
+        
+        (venv) amrut@Maverick:~/fault_environment$ fault cut --help
+        OVERVIEW: Cut away D-flipflops, converting them into inputs and outputs. This
+        is a necessary precursor to the ATPG step.
+        
+        USAGE: fault cut [--dff <dff>] [--scl-config <scl-config>] [--blackbox <blackbox> ...] [--blackbox-models <blackbox-models> ...] [--bypassing <bypassing> ...] --clock <clock> [--reset <reset>] [--reset-active-low] [--output <output>] <file>
+        
+        ARGUMENTS:
+          <file>                  The file to process.
+        
+        OPTIONS:
+          -d, --dff <dff>         Override for flip-flop cell names. Comma-delimited.
+                                  (Default: DFF).
+          -s, --scl-config, --sclConfig <scl-config>
+                                  Path for the YAML SCL config file. Recommended.
+          -b, --blackbox <blackbox>
+                                  Blackbox module names. Comma-delimited. (Default:
+                                  none)
+          -B, --blackbox-models, --blackboxModel <blackbox-models>
+                                  Files containing definitions for blackbox models.
+                                  Comma-delimited. (Default: none)
+          --bypassing <bypassing> Inputs to bypass when performing operations. May be
+                                  specified multiple times to bypass multiple inputs.
+                                  Will be held high during simulations by default,
+                                  unless =0 is appended to the option.
+          --clock <clock>         Clock name. In addition to being bypassed for certain
+                                  manipulation operations, during simulations it will
+                                  always be held high.
+          --reset <reset>         Reset name. In addition to being bypassed for certain
+                                  manipulation operations, during simulations it will
+                                  always be held low. (default: rst)
+          --reset-active-low, --activeLow
+                                  The reset signal is considered active-low insted, and
+                                  will be held high during simulations.
+          -o, --output <output>   Path to the output file. (Default: input + .chained.v)
+          --version               Show the version.
+          -h, --help              Show help information.
+        
+        (venv) amrut@Maverick:~/fault_environment$ 
+
 ---
 
 Tool #4 : Yosys (Synthesis)
