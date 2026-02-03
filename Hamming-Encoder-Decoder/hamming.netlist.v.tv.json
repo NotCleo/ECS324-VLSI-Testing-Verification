@@ -1,0 +1,39 @@
+{
+  "coverageList" : [
+    {
+      "goldenOutput" : "",
+      "vector" : [
+        [
+          "+",
+          14
+        ]
+      ],
+      "coverage" : {
+        "sa1" : [
+
+        ],
+        "sa0" : [
+
+        ]
+      }
+    }
+  ],
+  "outputs" : [
+    {
+      "polarity" : "output",
+      "name" : "data_out",
+      "from" : 3,
+      "to" : 0,
+      "ordinal" : 3
+    }
+  ],
+  "inputs" : [
+    {
+      "polarity" : "input",
+      "name" : "data_in",
+      "from" : 3,
+      "to" : 0,
+      "ordinal" : 2
+    }
+  ]
+}
