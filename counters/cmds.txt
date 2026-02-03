@@ -1,0 +1,28 @@
+read_verilog countertest.v
+read_liberty -lib osu035_stdcells.lib
+synth -top counter
+dfflibmap -liberty osu035_stdcells.lib
+proc; opt; flatten; opt
+techmap
+opt
+write_verilog counter_synthesized.v
+exit
+
+
+fault chain counter_synthesized.v \
+  --clock clk \
+  --reset rst \
+  --liberty osu035_stdcells.lib \
+  -o counter_scan1.v \
+  --sout sout
+
+
+fault cut counter_scan1.v \
+  --clock clk \
+  -o counter_scan_cut.v
+
+fault atpg counter_scan_cut.v \
+  --cell-model osu035_stdcells.v \
+  --clock clk \
+  -o patterns.tv.json \
+  --output-coverage-metadata coverage.yml
