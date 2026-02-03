@@ -1,0 +1,7 @@
+ 2035  yosys -p "read_verilog hamming_codec.v; synth -top hamming_codec; dfflibmap -liberty osu035_stdcells.lib; abc -liberty osu035_stdcells.lib; flatten; opt_clean; write_verilog -noattr hamming.netlist.v"
+ 2036  fault atpg hamming.netlist.v   --cell-model osu035_stdcells.v   --clock clk   | tee atpg_before_scan.txt
+ 2037  fault chain hamming.netlist.v   --clock clk   --reset rst   --liberty osu035_stdcells.lib   -o hamming.scanned.v   --sout sout
+ 2038  fault cut hamming.scanned.v   --clock clk   -o hamming.cut.v
+ 2039  fault atpg hamming.cut.v   --cell-model osu035_stdcells.v   --clock clk   -o patterns.tv.json   | tee atpg_after_scan.txt
+ 2040  grep "Coverage" atpg_before_scan.txt
+ 2041  grep "fault sites" atpg_after_scan.txt
