@@ -21,8 +21,13 @@ fault cut counter_scan1.v \
   --clock clk \
   -o counter_scan_cut.v
 
-fault atpg counter_scan_cut.v \
-  --cell-model osu035_stdcells.v \
-  --clock clk \
-  -o patterns.tv.json \
-  --output-coverage-metadata coverage.yml
+fault atpg counter_scan_cut.v --cell-model osu035_stdcells.v --clock clk -o patterns.tv.json --output-coverage-metadata coverage.yml
+--------
+
+ cd Fault/Tech/osu035/
+ vim <design file>.v
+ fault synth -t <top module name> -l osu035_stdcells.lib -o <output netlist name>.netlist.v <design file name>.v
+ fault cut --clock clk --reset rst_n --activeLow -o <output file name>.cut.v <output netlist name>.netlist.v
+ fault -g swift -c osu035_stdcells.v -v 100 <output file name>.cut.v --clock clk --reset rst_n --activeLow
+ fault -c osu035_stdcells.v -v 100 hadder.cut.v --clock clk --reset rst_n --activeLow
+ cat *.json
