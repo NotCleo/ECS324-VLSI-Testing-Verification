@@ -430,6 +430,7 @@ Tool #6 : OpenLane (RTL to GDS)
 
         https://unic-cass.github.io/training/01-course-intro.html
         http://opencircuitdesign.com/
+        https://openlane.readthedocs.io/en/latest/flow_overview.html
                                             
                     
     
