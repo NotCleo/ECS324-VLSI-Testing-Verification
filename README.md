@@ -427,6 +427,9 @@ Tool #6 : OpenLane (RTL to GDS)
                 make mount
                 ./flow.tcl -design <whatever>
                 klayout ~/OpenLane/designs/<whatever>/runs/*/results/final/gds/<whatever>.gds
+
+        https://unic-cass.github.io/training/01-course-intro.html
+        http://opencircuitdesign.com/
                                             
                     
     
@@ -444,7 +447,8 @@ Tool #7 : klayout
 
 ---
      
-    
+
+
 
 
 
