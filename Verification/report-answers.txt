@@ -1,0 +1,63 @@
+What are the features you could add in system Verilog test bench for functional verification compared to Verilog testbench? 
+  Could add Classes, 
+  Constrained Random Stimulus Generation, 
+  Functional Coverage (via covergroups), 
+  SystemVerilog Assertions (SVA)
+
+
+------------------------------------------
+Compare the two test benches, which is object oriented? What are the Object oriented programming concepts you have used in the test bench- Part B. 
+The Part B testbench is oops. 
+It is Encapsulation of a,b, cin + that logic, even Instantiation via the new()
+------------------------------------------
+
+
+Is it possible to define the stimulus class outside the testbench module? 
+Yes.
+------------------------------------------
+
+Can you still randomize and use it inside the testbench. 
+if the class definition is done then yes 
+------------------------------------------
+
+If the stimulus class is defined inside the testbench module or outside the testbench module, which one enhances code reusability? 
+Defining the class outside the testbench module enhances reusability. 
+------------------------------------------
+
+What are the different ways by which you can randomize stimulus generation ($urandom and object.randomize() difference?) What is constraint randomization?
+$urandomand $urandom\_range()are procedural functions that generate simple random values inline.object.randomize()is a class method that solves multiple random variables simultaneously while strictly adhering to rules defined inconstraint\ blocks. Constraint randomization is the methodology of automatically generating tests by defining the rules (constraints) of valid scenarios, letting a solver create valid random stimulus rather than writing manual, directed inputs.
+------------------------------------------
+
+Give syntax for Defining random variable and constraint block in system verilog. 
+
+    Random Variable: rand data_type variable_name; (rand bit a;)
+
+    Constraint Block: constraint constraint_name { conditions; } (constraint c1 { a inside {[0:1]}; })
+------------------------------------------
+
+Randomization enhances the stimulus search space. Will it always guarantees 100% functional coverage? 
+Not at all, it does not guarantee 100% coverage. Randomization is probabilistic and not determinstic.
+
+------------------------------------------
+
+If randomization doesn't give 100% coverage. 
+Can you say identifying the uncovered bins and using direct test vectors for the uncovered bin will guarantee 100% functional coverage 
+(Direct test+ constraint randomization, is it a way to attain 100% functional coverage?) 
+
+So randomization is like improving search space but also some bins might go uncovered unlike direct test which has 100% guranteed search space coverage, so if we do the coverage % analysis from teh report we can find the bins which were missed
+
+
+------------------------------------------
+
+Syntax for Defining covergroup, Defining cover group instance, System Function to determine coverage for cover group and coverpoint. 
+
+    Define Covergroup: covergroup cg_name; ... endgroup
+
+    Instance: cg_name instance_name = new();
+
+    Coverage Function: instance_name.get_inst_coverage() (for the whole group) or instance_name.coverpoint_name.get_coverage() (for a specific coverpoint).
+------------------------------------------
+
+Why do you need coverpoint and cross coverpoint in functional coverage analysis? 
+A coverpoint tells you if an individual signal successfully achieved all its expected states (toggled 0 and 1). 
+A cross coverpoint tracks the interaction between signals. 
