@@ -97,7 +97,7 @@ it always expects the first item written to be the first item read. If the DUT o
 
 
 
-
+(this was taken from google)
 
 10. Functional coverage tracks whether all intended scenarios of the DUT are exercised. Assertions check correctness. Functional coverage measures verification completeness. Justify the statement. 
 
