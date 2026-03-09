@@ -1,0 +1,106 @@
+1. Assertions are specified in the interface. Is it a good practice? Justify your answer. 
+
+Yes, 
+The interface is the static
+By placing assertions directly in the interface, 
+they do monitoring of hardware pins. 
+This allows the testbench to instantly catch any basic protocol violations (such as attempting to write to a full FIFO) the exact moment they happen on the clock edge.
+
+
+
+
+2. How many mailboxes are used in the architecture? What is the purpose of each one? 
+
+2 are used 
+
+    gen2driv (Generator to Driver): This mailbox passes the randomized transactions from the Generator to the Driver. It acts as a communication channel so the Driver knows exactly what data and operations (read/write) need to be driven onto the physical hardware pins.
+
+    mon2scb (Monitor to Scoreboard): This mailbox passes the observed transactions from the Monitor to the Scoreboard. Once the Monitor captures what actually happened on the hardware pins, it packages that activity into a transaction and sends it to the Scoreboard for verification.
+
+3. How did you execute concurrent tasks in the testbench? Which are those concurrent tasks? 
+Concurrent tasks were executed using a fork -join_any block inside the Environment class. 
+
+    The Generator
+
+    The Driver
+
+    The Monitor
+
+    The Scoreboard
+
+
+
+
+
+
+4. Mailbox handle is passed from generator to driver or from monitor to scoreboard. Copies of the mailbox are not created. Justify the statement. 
+
+mailbox is an object. 
+If the Generator and Driver were given copies of the mailbox, 
+they would be looking at completely different memory spaces. 
+The Generator would place a transaction into its copy, but the Driver's copy would remain empty. 
+By passing the handle instead of a copy, we guarantee that both components are sharing and communicating through the exact same mailbox.
+
+
+
+
+
+5. Which components in the testbench architecture used a virtual interface and why? 
+The Driver and the Monitor use virtual interfaces. because of the static and dynamic nature differeneces netweem tje two classes
+
+
+
+
+
+6. How will you differentiate a transaction and an interface? 
+
+    A Transaction: is dynamic, high-level software object. 
+ It bundles related data together into a single packet 
+no concept of hardware timing or clock cycles.
+
+    An Interface: is a bundle of static physical hardware wires. 
+It consists of the actual signals transitioning tick-by-tick based on hardware timing.
+
+
+
+
+
+7. How is functional verification done in the scoreboard? 
+The Scoreboard verifies the design by comparing actual results against expected results using a reference model. 
+
+
+
+
+
+8. What happens if a read is attempted when the FIFO is empty? Which component detects it first? 
+If a read is attempted on an empty FIFO, the DUT might output invalid data or hold its previous state.
+However, the Interface will detect this violation first. 
+Because we placed a concurrent assertion directly inside the interface (property p_no_read_when_empty),
+the interface actively monitors the physical pins and will instantly throw a protocol violation error the moment the read enable signal goes high while the empty flag is asserted.
+
+
+
+
+
+
+
+
+9. If the FIFO outputs the wrong order, which part of the testbench will catch it? 
+The Scoreboard part will catch it aftr comparison 
+A FIFO must strictly follow a First-In, First-Out rule. 
+Because the Scoreboard uses a standard queue to predict the correct answers, 
+it always expects the first item written to be the first item read. If the DUT outputs data out of order, the actual data won't match the expected data popped from the Scoreboard's queue, resulting in a verification failure.
+
+
+
+
+
+
+
+
+
+10. Functional coverage tracks whether all intended scenarios of the DUT are exercised. Assertions check correctness. Functional coverage measures verification completeness. Justify the statement. 
+
+    Assertions (Correctness): Assertions enforce strict rules on the hardware (e.g., "never write when full"). They ensure the design does not violate protocols or behave incorrectly, but they do not track how much of the design was actually used.
+
+    Functional Coverage (Completeness): Coverage acts as a checklist to ensure every required scenario (e.g., filling the FIFO entirely, emptying it, writing specific data ranges) was successfully simulated. You could have a perfectly correct design that was only tested with two numbers. Functional coverage proves that the testbench completely and thoroughly exercised the design before sign-off.
