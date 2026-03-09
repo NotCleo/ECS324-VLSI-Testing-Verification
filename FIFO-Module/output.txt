@@ -1,0 +1,179 @@
+[2026-03-09 16:58:02 UTC] vcs -full64 -licqueue '-timescale=1ns/1ns' '+vcs+flush+all' '+warn=all' '-sverilog' design.sv testbench.sv  && ./simv +vcs+lic+wait  
+                         Chronologic VCS (TM)
+       Version X-2025.06-SP1_Full64 -- Mon Mar  9 12:58:03 2026
+
+                    Copyright (c) 1991 - 2025 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Warning : License for product VCS-BASE-COMPILE will expire within 22 days, on: 30-mar-2026.
+
+If you would like to temporarily disable this message, set 
+ the VCS_LIC_EXPIRE_WARNING environment variable to the number of days
+before expiration that you want this message to start (the minimum is 0).
+Parsing design file 'design.sv'
+Parsing design file 'testbench.sv'
+Top Level Modules:
+       tbench_top
+TimeScale is 1 ns / 1 ns
+Notice: Ports coerced to inout, use -notice for details
+Starting vcs inline pass...
+4 modules and 0 UDP read.
+recompiling module fifo
+recompiling module fifo_intf
+recompiling module test
+recompiling module tbench_top
+All of 4 modules done
+Warning : License for product VCS-BASE-COMPILE will expire within 22 days, on: 30-mar-2026.
+
+If you would like to temporarily disable this message, set 
+ the VCS_LIC_EXPIRE_WARNING environment variable to the number of days
+before expiration that you want this message to start (the minimum is 0).
+rm -f _cuarc*.so _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+if [ -x ../simv ]; then chmod a-x ../simv; fi
+g++  -o ../simv      -rdynamic  -Wl,-rpath='$ORIGIN'/simv.daidir -Wl,-rpath=./simv.daidir -Wl,-rpath=/apps/vcsmx/vcs/X-2025.06-SP1/linux64/lib -L/apps/vcsmx/vcs/X-2025.06-SP1/linux64/lib  -Wl,-rpath-link=./   objs/amcQw_d.o  _287_archive_1.so  SIM_l.o       rmapats_mop.o rmapats.o rmar.o rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o            -lvirsim -lerrorinf -lsnpsmalloc -lvfs      -lvcsnew -ldistsimclient -lsimprofile -luclinative /apps/vcsmx/vcs/X-2025.06-SP1/linux64/lib/vcs_tls.o   -Wl,-whole-archive  -lvcsucli    -Wl,-no-whole-archive          /apps/vcsmx/vcs/X-2025.06-SP1/linux64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
+../simv up to date
+CPU time: .597 seconds to compile + .635 seconds to elab + .368 seconds to link
+Chronologic VCS simulator copyright 1991-2025
+Contains Synopsys proprietary information.
+Compiler version X-2025.06-SP1_Full64; Runtime version X-2025.06-SP1_Full64;  Mar  9 12:58 2026
+Warning : License for product VCS-BASE-RUNTIME will expire within 22 days, on: 30-mar-2026.
+
+If you would like to temporarily disable this message, set 
+ the VCS_LIC_EXPIRE_WARNING environment variable to the number of days
+before expiration that you want this message to start (the minimum is 0).
+Reset Started
+Reset Ended
+Write wdata = 7
+Pushed expected data: 7
+[DRIVER] Read rdata = 7
+Write wdata = fe
+Pushed expected data: fe
+Write wdata = b9
+Pushed expected data: b9
+[DRIVER] Read rdata = fe
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 135 ns
+[SCB-FAIL] Expected = 7 Actual = fe
+[DRIVER] Read rdata = b9
+Write wdata = 55
+Pushed expected data: 55
+[DRIVER] Read rdata = 55
+Write wdata = 55
+Pushed expected data: 55
+Write wdata = ab
+Pushed expected data: ab
+Write wdata = c9
+Pushed expected data: c9
+Write wdata = 11
+Pushed expected data: 11
+[DRIVER] Read rdata = 55
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 325 ns
+[SCB-FAIL] Expected = fe Actual = 55
+Write wdata = 6b
+Pushed expected data: 6b
+[DRIVER] Read rdata = ab
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 375 ns
+[SCB-FAIL] Expected = b9 Actual = ab
+Write wdata = ba
+Pushed expected data: ba
+Write wdata = 43
+Pushed expected data: 43
+[DRIVER] Read rdata = c9
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 445 ns
+[SCB-FAIL] Expected = 55 Actual = c9
+Write wdata = 8d
+Pushed expected data: 8d
+[DRIVER] Read rdata = 11
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 495 ns
+[SCB-FAIL] Expected = 55 Actual = 11
+Write wdata = 98
+Pushed expected data: 98
+[DRIVER] Read rdata = 6b
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 545 ns
+[SCB-FAIL] Expected = ab Actual = 6b
+[DRIVER] Read rdata = ba
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 575 ns
+[SCB-FAIL] Expected = c9 Actual = ba
+[DRIVER] Read rdata = 43
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 605 ns
+[SCB-FAIL] Expected = 11 Actual = 43
+[DRIVER] Read rdata = 8d
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 635 ns
+[SCB-FAIL] Expected = 6b Actual = 8d
+[DRIVER] Read rdata = 98
+Write wdata = 9
+Pushed expected data: 9
+[DRIVER] Read rdata = 9
+Write wdata = 94
+Pushed expected data: 94
+Write wdata = f4
+Pushed expected data: f4
+Write wdata = b8
+Pushed expected data: b8
+[DRIVER] Read rdata = 94
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 805 ns
+[SCB-FAIL] Expected = ba Actual = 94
+Write wdata = 81
+Pushed expected data: 81
+[DRIVER] Read rdata = f4
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 855 ns
+[SCB-FAIL] Expected = 43 Actual = f4
+Write wdata = 92
+Pushed expected data: 92
+[DRIVER] Read rdata = b8
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 905 ns
+[SCB-FAIL] Expected = 8d Actual = b8
+Write wdata = 4f
+Pushed expected data: 4f
+Write wdata = 55
+Pushed expected data: 55
+Write wdata = cb
+Pushed expected data: cb
+[DRIVER] Read rdata = 81
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 995 ns
+[SCB-FAIL] Expected = 98 Actual = 81
+[DRIVER] Read rdata = 92
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 1025 ns
+[SCB-FAIL] Expected = 9 Actual = 92
+[DRIVER] Read rdata = 4f
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 1055 ns
+[SCB-FAIL] Expected = 94 Actual = 4f
+[DRIVER] Read rdata = 55
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 1085 ns
+[SCB-FAIL] Expected = f4 Actual = 55
+Write wdata = 41
+Pushed expected data: 41
+Write wdata = ed
+Pushed expected data: ed
+Write wdata = a1
+Pushed expected data: a1
+[DRIVER] Read rdata = cb
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 1175 ns
+[SCB-FAIL] Expected = b8 Actual = cb
+Write wdata = f9
+Pushed expected data: f9
+Write wdata = 95
+Pushed expected data: 95
+[DRIVER] Read rdata = 41
+Error: "testbench.sv", 210: $unit::\scoreboard::main : at time 1245 ns
+[SCB-FAIL] Expected = 81 Actual = 41
+Functional Coverage: 91.67%
+$finish called from file "testbench.sv", line 261.
+$finish at simulation time                 1245
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 1245 ns
+CPU Time:      0.530 seconds;       Data structure size:   0.0Mb
+Mon Mar  9 12:58:05 2026
+Done
