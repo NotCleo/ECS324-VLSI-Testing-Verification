@@ -1,0 +1,12 @@
+Implement a FIFO using 
+1) sysv generator-driver using mailbox
+2) uvm sequencer-driver using tlm ports
+
+questions;
+
+a) create analogy between both
+b) difference b/w mailbox and tlm ports
+c) role of sequencer in uvm
+d) in uvm, user defined class extends base class, whats the syntax and also give it in context for a driver
+
+  
