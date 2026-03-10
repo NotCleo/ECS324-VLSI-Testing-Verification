@@ -9,4 +9,33 @@ b) difference b/w mailbox and tlm ports
 c) role of sequencer in uvm
 d) in uvm, user defined class extends base class, whats the syntax and also give it in context for a driver
 
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Generator - Driver using Mailbox implementation for FIFO
+
+class generator;
+  rand transaction trans;
+  int repeat_count;
+  mailbox gen2driv;
+  event ended;
+
+  function new(mailbox gen2driv, event ended);
+    this.gen2driv = gen2driv;
+    this.ended = ended;
+    trans = new();
+  endfunction
+
+  task main();
+    transaction tr;
+    repeat(repeat_count) begin
+      trans.randomize();      
+      tr = trans.do_copy();
+      gen2driv.put(tr);
+    end
+    -> ended; 
+  endtask
+endclass
   
