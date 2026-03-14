@@ -433,7 +433,7 @@ Tool #6 : OpenLane (RTL to GDS)
         https://openlane.readthedocs.io/en/latest/flow_overview.html
                                             
                     
-    
+
 ---
     
      
@@ -446,6 +446,75 @@ Tool #7 : klayout
         
 
 
+---
+
+
+    
+    # 1. Navigate to the OpenLane designs directory
+    
+    cd ~/OpenLane/designs
+    
+    
+    # 2. Create the design folder and its 'src' subdirectory
+    
+    mkdir -p systolic_array/src
+    
+    
+    # 3. Move into the design folder
+    
+    cd systolic_array
+    
+    
+    vim src/block.v
+    
+    vim src/systolic_array.v
+    
+    
+    vim config.json
+    
+    
+    {
+    
+        "DESIGN_NAME": "systolic_array",
+    
+        "VERILOG_FILES": "dir::src/*.v",
+    
+        "CLOCK_PORT": "clk",
+    
+        "CLOCK_PERIOD": 10.0,
+    
+        "FP_SIZING": "absolute",
+    
+        "DIE_AREA": "0 0 500 500"
+    
+    }
+    
+    
+    # 1. Navigate to the main OpenLane directory
+    
+    cd ~/OpenLane
+    
+    
+    # 2. Start the OpenLane Docker container
+    
+    make mount
+    
+    
+    # 3. Run the automated flow for your design
+    
+    ./flow.tcl -design systolic_array
+    
+    
+    # 1. Exit the Docker container
+    
+    exit
+    
+    
+    # 2. Launch KLayout to view the generated GDSII file
+    
+    # (The '*' wildcard automatically targets the most recent run folder)
+    
+    klayout ~/OpenLane/designs/systolic_array/runs/*/results/final/gds/systolic_array.gds
 ---
      
 
