@@ -1,0 +1,49 @@
+what are atomic operations in OS and c?
+
+Atomic operations are uninterruptible, indivisible operations that either complete entirely or not at all, preventing data races in concurrent systems without requiring heavy locks. They are supported by hardware (CPU) to ensure that shared data updates—such as incrementing a counter—occur without interference from other threads or context switches. 
+Since C11, the <stdatomic.h> library allows developers to declare atomic types (_Atomic keyword)
+Usage: A variable int counter becomes atomic using _Atomic int counter;.
+Operations: Instead of counter++, you can use atomic_fetch_add(&counter, 1) to ensure the addition is atomic.
+Types: C provides atomic types like atomic_bool, atomic_int, atomic_long.
+
+https://www.geeksforgeeks.org/operating-systems/atomic-operations-in-os/
+
+
+In Verilog, the difference between synchronous and asynchronous reset is determined by how the
+reset signal is included in the always block's sensitivity list and conditional logic
+
+i) if reset is in sensitivity list its async 
+
+module async_reset_flop(input logic clk, input logic reset, input logic d, output logic q);
+    always_ff @(posedge clk, posedge reset) begin
+        if (reset) begin // Reset has highest priority and acts immediately
+            q <= 1'b0;
+        end else begin
+            q <= d; // Normal operation on clock edge
+        end
+    end
+endmodule
+
+
+ii) if reset is inside always block its sync
+
+module sync_reset_flop(input logic clk, input logic reset, input logic d, output logic q);
+    always_ff @(posedge clk) begin // Only sensitive to the clock edge
+        if (reset) begin // Reset condition is checked synchronously with the clock
+            q <= 1'b0;
+        end else begin
+            q <= d;
+        end
+    end
+endmodule
+
+
+
+LEF (Library Exchange Format) and DEF (Design Exchange Format) are ASCII file formats used in VLSI physical design. LEF describes the abstract physical properties of cells (boundaries, pins, layers), while DEF defines the actual design instance (placement, routing, netlist). The SPEF-Extractor tool uses both to extract resistance/capacitance (RC) parasitics.
+Key Differences:
+
+    LEF tells you what the cells look like.
+    DEF tells you how they are used.
+    LEF is constant for a library; DEF changes for every design.
+
+The DEF file contains all information related to the particular electronic circuit design: design constraints, layout, netlist. The LEF file contains library information related to cells and modules used in the design, as well as information about layers, vias, P&R boundary and some other information useful for P&R.
