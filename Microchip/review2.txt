@@ -14,3 +14,6 @@ If you want to find bottlenecks in C code, here are the industry-standard tools 
 
 
 check how to use these!!
+
+
+"Lint" is also another tool for C/ systemverilog/ verilog for semantic static analysis
