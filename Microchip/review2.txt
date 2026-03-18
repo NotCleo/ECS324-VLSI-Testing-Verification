@@ -17,3 +17,6 @@ check how to use these!!
 
 
 "Lint" is also another tool for C/ systemverilog/ verilog for semantic static analysis
+
+
+do the knn using pthreads and stdatomic to increment each thread and try how it works!
