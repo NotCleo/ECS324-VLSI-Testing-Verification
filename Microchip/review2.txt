@@ -4,3 +4,13 @@ see - https://en.wikipedia.org/wiki/ARINC_429
 
 Also start exploring the accelerator for the options trading for the paper off google scholar
   
+If you want to find bottlenecks in C code, here are the industry-standard tools you should look into:
+
+    gprof (GNU Profiler): The most common starting point. You compile your C code with a special flag (-pg), run the program normally, and it generates a report showing exactly how much time was spent in each function and how many times each function was called.
+
+    perf (Linux Profiling): A highly powerful, system-wide profiler for Linux. It taps into hardware performance counters to tell you not just how long things took, but why (e.g., identifying CPU cache misses or branch mispredictions).
+
+    Callgrind (part of Valgrind): This tool runs your program in a simulated CPU. It is slower, but it gives incredibly precise, instruction-by-instruction data on what your code is doing. You can view the output visually using a tool called KCachegrind to see a map of your bottlenecks.
+
+
+check how to use these!!
