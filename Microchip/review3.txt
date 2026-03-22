@@ -1,0 +1,2 @@
+The stack size in Linux is typically limited to 8MB. so switch to malloc then
+
