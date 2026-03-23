@@ -1,0 +1,8 @@
+# 1. Read Verilog with SystemVerilog support AND define the FORMAL macro
+read_verilog -sv -D FORMAL countersques.v
+
+# 2. Prepare the design
+prep -top counter
+
+# 3. Run SAT with the corrected -show-regs flag
+sat -verify -prove-asserts -seq 5 -show-inputs -show-outputs -show-regs
