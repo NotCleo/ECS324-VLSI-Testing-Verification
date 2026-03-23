@@ -1,0 +1,193 @@
+amrut@Maverick:~/yosys/examples/cmos$ yosys -s lec.ys 
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Executing script file `lec.ys' --
+
+1. Executing Verilog-2005 frontend: circuit_1.v
+Parsing Verilog input from `circuit_1.v' to AST representation.
+Generating RTLIL representation for module `\ref'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: circuit_2.v
+Parsing Verilog input from `circuit_2.v' to AST representation.
+Generating RTLIL representation for module `\imp'.
+Successfully finished Verilog frontend.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 2 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\imp.$proc$circuit_2.v:2$3'.
+Creating decoders for process `\ref.$proc$circuit_1.v:2$1'.
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\imp.\y' using process `\imp.$proc$circuit_2.v:2$3'.
+  created $dff cell `$procdff$8' with positive edge clock.
+Creating register for signal `\ref.\y' using process `\ref.$proc$circuit_1.v:2$1'.
+  created $dff cell `$procdff$9' with positive edge clock.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `imp.$proc$circuit_2.v:2$3'.
+Removing empty process `ref.$proc$circuit_1.v:2$1'.
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module imp.
+Optimizing module ref.
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module imp.
+Optimizing module ref.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\imp'.
+Finding identical cells in module `\ref'.
+Removed a total of 0 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \imp..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \ref..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \imp.
+  Optimizing cells in module \ref.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\imp'.
+Finding identical cells in module `\ref'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \imp..
+Finding unused cells or wires in module \ref..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~2 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module imp.
+Optimizing module ref.
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \imp..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \ref..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \imp.
+  Optimizing cells in module \ref.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\imp'.
+Finding identical cells in module `\ref'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \imp..
+Finding unused cells or wires in module \ref..
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module imp.
+Optimizing module ref.
+
+4.16. Finished OPT passes. (There is nothing left to do.)
+
+5. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: a_gold (\a_gold), a_gate (\a_gate) -> a
+Presumably equivalent wires: b_gold (\b_gold), b_gate (\b_gate) -> b
+Presumably equivalent wires: clk_gold (\clk_gold), clk_gate (\clk_gate) -> clk
+Presumably equivalent wires: y_gold (\y_gold), y_gate (\y_gate) -> y
+
+6. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1. Analyzing design hierarchy..
+Top module:  \equiv_miter
+
+6.2. Analyzing design hierarchy..
+Top module:  \equiv_miter
+Removing unused module `\imp'.
+Removing unused module `\ref'.
+Removed 2 unused modules.
+
+7. Executing FLATTEN pass (flatten design).
+
+8. Executing EQUIV_SIMPLE pass.
+Found 1 unproven $equiv cells (1 groups) in equiv_miter:
+  Trying to prove $equiv for \y: failed.
+Proved 0 previously unproven $equiv cells.
+
+9. Executing EQUIV_INDUCT pass.
+Found 1 unproven $equiv cells in module equiv_miter:
+  Proving existence of base case for step 1. (78 clauses over 35 variables)
+  Proving induction step 1. (173 clauses over 74 variables)
+  Proof for induction step holds. Entire workset of 1 cells proven!
+Proved 1 previously unproven $equiv cells.
+
+10. Executing EQUIV_STATUS pass.
+Found 1 $equiv cells in equiv_miter:
+  Of those cells 1 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: 686824a361, CPU: user 0.02s system 0.01s, MEM: 9.20 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 30% 4x opt_expr (0 sec), 19% 3x opt_merge (0 sec), ...
