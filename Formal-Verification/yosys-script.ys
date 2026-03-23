@@ -1,0 +1,25 @@
+# 1. Read both RTL designs
+read_verilog circuit_1.v
+read_verilog circuit_2.v
+
+# 2. Process always blocks into D-flip-flops and optimize
+proc
+opt
+
+# 3. Create the miter circuit using equiv_make
+equiv_make ref imp equiv_miter
+
+# 4. Set the new miter circuit as the top module and flatten
+hierarchy -top equiv_miter
+flatten
+
+# 5. Run the combinational equivalence check 
+# (This proves any purely combinational internal nodes)
+equiv_simple
+
+# 6. Run the sequential equivalence check
+# (This handles the flip-flop boundaries using induction)
+equiv_induct
+
+# 7. Check the final status and assert success
+equiv_status -assert
