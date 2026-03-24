@@ -1,0 +1,16 @@
+BEGIN 3:seq_if:fast__1:work
+    din :  1:design_sv_unit:fast:work
+    dout :  1:design_sv_unit:fast:work
+    current_state :  1:design_sv_unit:fast:work
+    clk :  1:design_sv_unit:fast:work
+END 
+BEGIN 1:sd11011_mealy_pure:fast:work
+    current_state :  1:testbench:fast:work
+END 
+BEGIN 3:seq_if:fast__2:work
+    reset :  1:testbench:fast:work
+    dout :  1:testbench:fast:work
+    clk :  1:testbench:fast:work
+    din :  1:testbench:fast:work
+    current_state :  1:testbench:fast:work
+END 

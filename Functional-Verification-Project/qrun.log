@@ -1,0 +1,467 @@
+QuestaSim-64 qrun 2025.2 Utility 2025.05 May 31 2025
+Start time: 11:46:33 on Mar 23,2026
+qrun -batch -access=rw+/. -timescale 1ns/1ns -mfcu design.sv testbench.sv -voptargs="+acc=npr" -do "run.do" 
+** Note: (qrun-220) 'modelsim.ini' is used as the ini file.
+Creating library 'qrun.out/work'.
+QuestaSim-64 vlog 2025.2 Compiler 2025.05 May 31 2025
+Start time: 11:46:33 on Mar 23,2026
+vlog -timescale 1ns/1ns -mfcu design.sv testbench.sv -work qrun.out/work -statslog qrun.out/stats_log -csession=incr 
+** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
+-- Compiling package fsm_pkg
+-- Compiling package fsm_pkg
+** Warning: ** while parsing file included at testbench.sv(1)
+** at fsm_pkg.sv(1): (vlog-2275) Existing package 'fsm_pkg' at line 1 will be overwritten.
+-- Compiling package design_sv_unit
+-- Importing package fsm_pkg
+-- Compiling module sd11011_mealy_pure
+-- Compiling package fsm_pkg
+-- Compiling interface seq_if
+-- Compiling module testbench
+
+Top level modules:
+	testbench
+End time: 11:46:33 on Mar 23,2026, Elapsed time: 0:00:00
+Errors: 0, Warnings: 1
+QuestaSim-64 vopt 2025.2 Compiler 2025.05 May 31 2025
+** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+Start time: 11:46:33 on Mar 23,2026
+vopt -access=rw+/. -timescale 1ns/1ns -mfcu "+acc=npr" -findtoplevels qrun.out/work+2+ -work qrun.out/work -statslog qrun.out/stats_log -csession=incr -o qrun_opt -csessionid=3 
+** Note: (vopt-220) 'modelsim.ini' is used as the ini file.
+
+Top level modules:
+	testbench
+
+Analyzing design...
+-- Loading module testbench
+-- Loading interface seq_if
+-- Loading module sd11011_mealy_pure
+Optimizing 6 design-units (inlining 0/3 module instances):
+-- Optimizing package fsm_pkg(fast)
+-- Optimizing package design_sv_unit(fast)
+-- Optimizing module testbench(fast)
+-- Optimizing interface seq_if(fast__2)
+-- Optimizing module sd11011_mealy_pure(fast)
+-- Optimizing interface seq_if(fast)
+Optimized design name is qrun_opt
+End time: 11:46:34 on Mar 23,2026, Elapsed time: 0:00:01
+Errors: 0, Warnings: 1
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -batch -lib qrun.out/work -do "run.do" -statslog qrun.out/stats_log qrun_opt -appendlog -l qrun.log 
+# Start time: 11:46:34 on Mar 23,2026
+# //  Questa Sim-64
+# //  Version 2025.2 linux_x86_64 May 31 2025
+# //
+# // Unpublished work. Copyright 2025 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.fsm_pkg(fast)
+# Loading work.design_sv_unit(fast)
+# Loading work.testbench(fast)
+# Loading work.seq_if(fast__2)
+# Loading work.sd11011_mealy_pure(fast)
+# Loading work.seq_if(fast)
+# 
+# do run.do
+# QuestaSim-64 vlog 2025.2 Compiler 2025.05 May 31 2025
+# Start time: 11:46:35 on Mar 23,2026
+# vlog fsm_pkg.sv design.sv testbench.sv 
+# ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
+# -- Compiling package fsm_pkg
+# -- Compiling package fsm_pkg
+# ** Warning: ** while parsing file included at design.sv(1)
+# ** at fsm_pkg.sv(1): (vlog-2275) Existing package 'fsm_pkg' at line 1 will be overwritten.
+# -- Compiling package design_sv_unit
+# -- Importing package fsm_pkg
+# -- Compiling module sd11011_mealy_pure
+# -- Compiling package fsm_pkg
+# ** Warning: ** while parsing file included at testbench.sv(1)
+# ** at fsm_pkg.sv(1): (vlog-2275) Existing package 'fsm_pkg' at line 1 will be overwritten.
+# -- Compiling package testbench_sv_unit
+# -- Compiling interface seq_if
+# -- Compiling module testbench
+# 
+# Top level modules:
+# 	testbench
+# End time: 11:46:35 on Mar 23,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 2
+# End time: 11:46:35 on Mar 23,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vsim -coverage -voptargs="+acc" work.testbench 
+# Start time: 11:46:35 on Mar 23,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vopt-220) 'modelsim.ini' is used as the ini file.
+# ** Note: (vopt-143) Recognized 1 FSM in module "sd11011_mealy_pure(fast)".
+# Loading sv_std.std
+# Loading work.fsm_pkg(fast)
+# Loading work.design_sv_unit(fast)
+# Loading work.testbench(fast)
+# Loading work.seq_if(fast__2)
+# Loading work.sd11011_mealy_pure(fast)
+# Loading work.seq_if(fast)
+# ** Warning: (vsim-8634) Code was not compiled with coverage options.
+# [SCOREBOARD] PASS 1: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 2: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 3: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 4: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 5: din=1 | actual_dout=1 | expected_dout=1
+# [SCOREBOARD] PASS 6: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 7: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 8: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 9: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 10: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 11: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 12: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 13: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 14: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 15: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 16: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 17: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 18: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 19: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 20: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 21: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 22: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 23: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 24: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 25: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 26: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 27: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 28: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 29: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 30: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 31: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 32: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 33: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 34: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 35: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 36: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 37: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 38: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 39: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 40: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 41: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 42: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 43: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 44: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 45: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 46: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 47: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 48: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 49: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 50: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 51: din=1 | actual_dout=1 | expected_dout=1
+# [SCOREBOARD] PASS 52: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 53: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 54: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 55: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 56: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 57: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 58: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 59: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 60: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 61: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 62: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 63: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 64: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 65: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 66: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 67: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 68: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 69: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 70: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 71: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 72: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 73: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 74: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 75: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 76: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 77: din=1 | actual_dout=1 | expected_dout=1
+# [SCOREBOARD] PASS 78: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 79: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 80: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 81: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 82: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 83: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 84: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 85: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 86: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 87: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 88: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 89: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 90: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 91: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 92: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 93: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 94: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 95: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 96: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 97: din=0 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 98: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 99: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 100: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 101: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 102: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 103: din=1 | actual_dout=0 | expected_dout=0
+# [SCOREBOARD] PASS 104: din=1 | actual_dout=0 | expected_dout=0
+# =================================================
+# --- SIMULATION COMPLETE ---
+# Total Functional Coverage:  91.67%
+# Cross Coverage (State x Din): 100.00%
+# Cross Coverage (State x Dout): 100.00%
+# =================================================
+# ** Note: $stop    : testbench.sv(65)
+#    Time: 1055 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at testbench.sv line 65
+# Stopped at testbench.sv line 65
+# Coverage Report by instance with details
+# 
+# =================================================================================
+# === Instance: /testbench/vif
+# === Design Unit: work.seq_if
+# =================================================================================
+# 
+# Assertion Coverage:
+#     Assertions                       3         3         0   100.00%
+# --------------------------------------------------------------------
+# Name                 File(Line)                   Failure      Pass 
+#                                                   Count        Count
+# --------------------------------------------------------------------
+# /testbench/vif/assert_reset
+#                      interface.sv(15)                   0          1
+# /testbench/vif/assert_no_x_din
+#                      interface.sv(23)                   0          1
+# /testbench/vif/assert_mealy_dout
+#                      interface.sv(30)                   0          1
+# 
+# =================================================================================
+# === Instance: /design_sv_unit
+# === Design Unit: work.design_sv_unit
+# =================================================================================
+# 
+# Covergroup Coverage:
+#     Covergroups                      1        na        na    91.66%
+#         Coverpoints/Crosses          6        na        na        na
+#             Covergroup Bins         27        26         1    96.29%
+# ----------------------------------------------------------------------------------------------------------
+# Covergroup                                             Metric       Goal       Bins    Status               
+#                                                                                                          
+# ----------------------------------------------------------------------------------------------------------
+#  TYPE /design_sv_unit/monitor/cg_fsm_cov               91.66%        100          -    Uncovered            
+#     covered/total bins:                                    26         27          -                      
+#     missing/total bins:                                     1         27          -                      
+#     % Hit:                                             96.29%        100          -                      
+#     Coverpoint cp_din                                 100.00%        100          -    Covered              
+#         covered/total bins:                                 2          2          -                      
+#         missing/total bins:                                 0          2          -                      
+#         % Hit:                                        100.00%        100          -                      
+#     Coverpoint cp_dout                                100.00%        100          -    Covered              
+#         covered/total bins:                                 2          2          -                      
+#         missing/total bins:                                 0          2          -                      
+#         % Hit:                                        100.00%        100          -                      
+#     Coverpoint cp_state                               100.00%        100          -    Covered              
+#         covered/total bins:                                 5          5          -                      
+#         missing/total bins:                                 0          5          -                      
+#         % Hit:                                        100.00%        100          -                      
+#     Coverpoint cp_din_seq                              50.00%        100          -    Uncovered            
+#         covered/total bins:                                 1          2          -                      
+#         missing/total bins:                                 1          2          -                      
+#         % Hit:                                         50.00%        100          -                      
+#     Cross cross_state_din                             100.00%        100          -    Covered              
+#         covered/total bins:                                10         10          -                      
+#         missing/total bins:                                 0         10          -                      
+#         % Hit:                                        100.00%        100          -                      
+#     Cross cross_state_dout                            100.00%        100          -    Covered              
+#         covered/total bins:                                 6          6          -                      
+#         missing/total bins:                                 0          6          -                      
+#         % Hit:                                        100.00%        100          -                      
+#  Covergroup instance \/design_sv_unit::monitor::cg_fsm_cov  
+#                                                        91.66%        100          -    Uncovered            
+#     covered/total bins:                                    26         27          -                      
+#     missing/total bins:                                     1         27          -                      
+#     % Hit:                                             96.29%        100          -                      
+#     Coverpoint cp_din                                 100.00%        100          -    Covered              
+#         covered/total bins:                                 2          2          -                      
+#         missing/total bins:                                 0          2          -                      
+#         % Hit:                                        100.00%        100          -                      
+#         bin auto[0]                                        18          1          -    Covered              
+#         bin auto[1]                                        88          1          -    Covered              
+#     Coverpoint cp_dout                                100.00%        100          -    Covered              
+#         covered/total bins:                                 2          2          -                      
+#         missing/total bins:                                 0          2          -                      
+#         % Hit:                                        100.00%        100          -                      
+#         bin auto[0]                                       103          1          -    Covered              
+#         bin auto[1]                                         3          1          -    Covered              
+#     Coverpoint cp_state                               100.00%        100          -    Covered              
+#         covered/total bins:                                 5          5          -                      
+#         missing/total bins:                                 0          5          -                      
+#         % Hit:                                        100.00%        100          -                      
+#         bin all_states[S0]                                 14          1          -    Covered              
+#         bin all_states[S1]                                 10          1          -    Covered              
+#         bin all_states[S2]                                 68          1          -    Covered              
+#         bin all_states[S3]                                  7          1          -    Covered              
+#         bin all_states[S4]                                  6          1          -    Covered              
+#     Coverpoint cp_din_seq                              50.00%        100          -    Uncovered            
+#         covered/total bins:                                 1          2          -                      
+#         missing/total bins:                                 1          2          -                      
+#         % Hit:                                         50.00%        100          -                      
+#         bin seq_11011                                       4          1          -    Covered              
+#         bin overlap_test                                    0          1          -    ZERO                 
+#     Cross cross_state_din                             100.00%        100          -    Covered              
+#         covered/total bins:                                10         10          -                      
+#         missing/total bins:                                 0         10          -                      
+#         % Hit:                                        100.00%        100          -                      
+#         Auto, Default and User Defined Bins:
+#             bin <all_states[S4],auto[1]>                    3          1          -    Covered              
+#             bin <all_states[S3],auto[1]>                    6          1          -    Covered              
+#             bin <all_states[S2],auto[1]>                   61          1          -    Covered              
+#             bin <all_states[S1],auto[1]>                    8          1          -    Covered              
+#             bin <all_states[S0],auto[1]>                   10          1          -    Covered              
+#             bin <all_states[S4],auto[0]>                    3          1          -    Covered              
+#             bin <all_states[S3],auto[0]>                    1          1          -    Covered              
+#             bin <all_states[S2],auto[0]>                    7          1          -    Covered              
+#             bin <all_states[S1],auto[0]>                    2          1          -    Covered              
+#             bin <all_states[S0],auto[0]>                    4          1          -    Covered              
+#     Cross cross_state_dout                            100.00%        100          -    Covered              
+#         covered/total bins:                                 6          6          -                      
+#         missing/total bins:                                 0          6          -                      
+#         % Hit:                                        100.00%        100          -                      
+#         Auto, Default and User Defined Bins:
+#             bin <all_states[S4],auto[1]>                    3          1          -    Covered              
+#             bin <all_states[S4],auto[0]>                    3          1          -    Covered              
+#             bin <all_states[S3],auto[0]>                    7          1          -    Covered              
+#             bin <all_states[S1],auto[0]>                   10          1          -    Covered              
+#             bin <all_states[S2],auto[0]>                   68          1          -    Covered              
+#             bin <all_states[S0],auto[0]>                   14          1          -    Covered              
+#         Illegal and Ignore Bins:
+#             ignore_bin impossible_outs                      0                     -    ZERO                 
+# 
+# COVERGROUP COVERAGE:
+# ----------------------------------------------------------------------------------------------------------
+# Covergroup                                             Metric       Goal       Bins    Status               
+#                                                                                                          
+# ----------------------------------------------------------------------------------------------------------
+#  TYPE /design_sv_unit/monitor/cg_fsm_cov               91.66%        100          -    Uncovered            
+#     covered/total bins:                                    26         27          -                      
+#     missing/total bins:                                     1         27          -                      
+#     % Hit:                                             96.29%        100          -                      
+#     Coverpoint cp_din                                 100.00%        100          -    Covered              
+#         covered/total bins:                                 2          2          -                      
+#         missing/total bins:                                 0          2          -                      
+#         % Hit:                                        100.00%        100          -                      
+#     Coverpoint cp_dout                                100.00%        100          -    Covered              
+#         covered/total bins:                                 2          2          -                      
+#         missing/total bins:                                 0          2          -                      
+#         % Hit:                                        100.00%        100          -                      
+#     Coverpoint cp_state                               100.00%        100          -    Covered              
+#         covered/total bins:                                 5          5          -                      
+#         missing/total bins:                                 0          5          -                      
+#         % Hit:                                        100.00%        100          -                      
+#     Coverpoint cp_din_seq                              50.00%        100          -    Uncovered            
+#         covered/total bins:                                 1          2          -                      
+#         missing/total bins:                                 1          2          -                      
+#         % Hit:                                         50.00%        100          -                      
+#     Cross cross_state_din                             100.00%        100          -    Covered              
+#         covered/total bins:                                10         10          -                      
+#         missing/total bins:                                 0         10          -                      
+#         % Hit:                                        100.00%        100          -                      
+#     Cross cross_state_dout                            100.00%        100          -    Covered              
+#         covered/total bins:                                 6          6          -                      
+#         missing/total bins:                                 0          6          -                      
+#         % Hit:                                        100.00%        100          -                      
+#  Covergroup instance \/design_sv_unit::monitor::cg_fsm_cov  
+#                                                        91.66%        100          -    Uncovered            
+#     covered/total bins:                                    26         27          -                      
+#     missing/total bins:                                     1         27          -                      
+#     % Hit:                                             96.29%        100          -                      
+#     Coverpoint cp_din                                 100.00%        100          -    Covered              
+#         covered/total bins:                                 2          2          -                      
+#         missing/total bins:                                 0          2          -                      
+#         % Hit:                                        100.00%        100          -                      
+#         bin auto[0]                                        18          1          -    Covered              
+#         bin auto[1]                                        88          1          -    Covered              
+#     Coverpoint cp_dout                                100.00%        100          -    Covered              
+#         covered/total bins:                                 2          2          -                      
+#         missing/total bins:                                 0          2          -                      
+#         % Hit:                                        100.00%        100          -                      
+#         bin auto[0]                                       103          1          -    Covered              
+#         bin auto[1]                                         3          1          -    Covered              
+#     Coverpoint cp_state                               100.00%        100          -    Covered              
+#         covered/total bins:                                 5          5          -                      
+#         missing/total bins:                                 0          5          -                      
+#         % Hit:                                        100.00%        100          -                      
+#         bin all_states[S0]                                 14          1          -    Covered              
+#         bin all_states[S1]                                 10          1          -    Covered              
+#         bin all_states[S2]                                 68          1          -    Covered              
+#         bin all_states[S3]                                  7          1          -    Covered              
+#         bin all_states[S4]                                  6          1          -    Covered              
+#     Coverpoint cp_din_seq                              50.00%        100          -    Uncovered            
+#         covered/total bins:                                 1          2          -                      
+#         missing/total bins:                                 1          2          -                      
+#         % Hit:                                         50.00%        100          -                      
+#         bin seq_11011                                       4          1          -    Covered              
+#         bin overlap_test                                    0          1          -    ZERO                 
+#     Cross cross_state_din                             100.00%        100          -    Covered              
+#         covered/total bins:                                10         10          -                      
+#         missing/total bins:                                 0         10          -                      
+#         % Hit:                                        100.00%        100          -                      
+#         Auto, Default and User Defined Bins:
+#             bin <all_states[S4],auto[1]>                    3          1          -    Covered              
+#             bin <all_states[S3],auto[1]>                    6          1          -    Covered              
+#             bin <all_states[S2],auto[1]>                   61          1          -    Covered              
+#             bin <all_states[S1],auto[1]>                    8          1          -    Covered              
+#             bin <all_states[S0],auto[1]>                   10          1          -    Covered              
+#             bin <all_states[S4],auto[0]>                    3          1          -    Covered              
+#             bin <all_states[S3],auto[0]>                    1          1          -    Covered              
+#             bin <all_states[S2],auto[0]>                    7          1          -    Covered              
+#             bin <all_states[S1],auto[0]>                    2          1          -    Covered              
+#             bin <all_states[S0],auto[0]>                    4          1          -    Covered              
+#     Cross cross_state_dout                            100.00%        100          -    Covered              
+#         covered/total bins:                                 6          6          -                      
+#         missing/total bins:                                 0          6          -                      
+#         % Hit:                                        100.00%        100          -                      
+#         Auto, Default and User Defined Bins:
+#             bin <all_states[S4],auto[1]>                    3          1          -    Covered              
+#             bin <all_states[S4],auto[0]>                    3          1          -    Covered              
+#             bin <all_states[S3],auto[0]>                    7          1          -    Covered              
+#             bin <all_states[S1],auto[0]>                   10          1          -    Covered              
+#             bin <all_states[S2],auto[0]>                   68          1          -    Covered              
+#             bin <all_states[S0],auto[0]>                   14          1          -    Covered              
+#         Illegal and Ignore Bins:
+#             ignore_bin impossible_outs                      0                     -    ZERO                 
+# 
+# TOTAL COVERGROUP COVERAGE: 91.66%  COVERGROUP TYPES: 1
+# 
+# ASSERTION RESULTS:
+# --------------------------------------------------------------------
+# Name                 File(Line)                   Failure      Pass 
+#                                                   Count        Count
+# --------------------------------------------------------------------
+# /testbench/vif/assert_reset
+#                      interface.sv(15)                   0          1
+# /testbench/vif/assert_no_x_din
+#                      interface.sv(23)                   0          1
+# /testbench/vif/assert_mealy_dout
+#                      interface.sv(30)                   0          1
+# 
+# Total Coverage By Instance (filtered view): 95.83%
+# 
+# 
+# End time: 11:46:36 on Mar 23,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 1
+End time: 11:46:36 on Mar 23,2026, Elapsed time: 0:00:03
+*** Summary *********************************************
+    qrun: Errors:   0, Warnings:   0
+    vlog: Errors:   0, Warnings:   1
+    vopt: Errors:   0, Warnings:   1
+    vsim: Errors:   0, Warnings:   1
+  Totals: Errors:   0, Warnings:   3
