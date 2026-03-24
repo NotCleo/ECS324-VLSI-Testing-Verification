@@ -1,0 +1,9 @@
+# 1. Read Verilog with SystemVerilog support AND define the FORMAL macro
+read_verilog -sv -D FORMAL counter_live.v
+
+# 2. Prepare the design
+prep -top counter
+
+# 3. Run Bounded Model Checking for 8 cycles
+sat -verify -prove-asserts -seq 8 -show-regs
+
