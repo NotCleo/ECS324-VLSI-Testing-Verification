@@ -1,0 +1,19 @@
+# Load the original RTL and rename it to 'top_ref'
+read_verilog ques4.v
+rename top top_ref
+
+# Load the optimized netlist and rename it to 'top_impl'
+read_verilog top_opt.v
+rename top top_impl
+
+# Create a miter circuit combining both designs
+equiv_make top_ref top_impl equiv_miter
+
+# Set the miter as the top module
+hierarchy -top equiv_miter
+
+# Perform formal equivalence checking for combinational logic
+equiv_simple
+
+# Verify final status and stop if they are not equivalent
+equiv_status -assert
