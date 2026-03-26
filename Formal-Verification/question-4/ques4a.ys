@@ -1,0 +1,11 @@
+# Read the original RTL file
+read_verilog ques4.v
+
+# Prepare the design for processing
+prep -top top
+
+# Perform logic optimization
+opt
+
+# Generate the optimized netlist
+write_verilog top_opt.v
