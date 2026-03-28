@@ -1,0 +1,1 @@
+count of items in current directory - ls -A | wc -l
