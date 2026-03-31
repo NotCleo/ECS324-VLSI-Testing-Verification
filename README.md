@@ -1,4 +1,5 @@
 https://fpga-ignite.github.io/lab-materials/nguyen-slides.pdf
+https://github.com/Z3Prover/z3
 
 # ECS324-VLSI-Testing-Verification
 
