@@ -1,3 +1,24 @@
+Question : 
+
+
+Constraint File/ Config Specifications?
+
+    technology : Sky130nm
+    clock period = 10ns 
+    input delay : max = 2ns, min = 0.5ns
+    output delay : max = 3ns, min = 1ns
+    clock uncertainty : setup = 0.2ns, hold = 0.1ns
+    path from FF1 to FF2 is multicycle = 2
+
+
+Design specifications?
+  
+  input : INP
+  output : OUTB
+  Clock : CLK
+  
+  INP is stored in FF1 which passes through Y = (A & B) | C, output of Y is put into FF2, OUTB comes out of FF2
+  
 # OpenLane Custom Design Flow: RTL to GDSII
 
 This repository contains the setup, configuration, and constraints required to run a custom 2-flip-flop design through the complete OpenLane RTL-to-GDSII flow using the SkyWater 130nm PDK.
@@ -40,3 +61,68 @@ Add this in config.json
 
     "FP_SIZING": "absolute",
     "DIE_AREA": "0 0 50 50"
+
+---
+
+More about the background work : 
+
+Files needed?
+
+  1) Verilog (.v) file
+  2) Constraints (.sdc) file
+  3) Technology (.lib) file - skywater130nm
+  4) OpenSTA script (.tcl) file
+
+
+Installation? (if needed to be done standalone on OpenSTA)
+
+  git clone https://github.com/The-OpenROAD-Project/OpenSTA.git
+  cd ~
+  wget https://github.com/davidkebo/cudd/raw/main/cudd_versions/cudd-3.0.0.tar.gz
+  tar xvfz cudd-3.0.0.tar.gz
+  cd cudd-3.0.0
+  ./configure
+  make
+  cd ~/OpenSTA/build
+  rm CMakeCache.txt
+  cmake -DCUDD_DIR=~/cudd-3.0.0 ..
+  make
+
+
+Steps?
+
+  1) Post installation, check designs
+  2) If your own RTL, write your constraints.sdc file, config.json file, take your own .lib file and run this
+  3) In the .sdc file, run with bare minimum commands like set_clock input/output delay so as to capture the setup/hold violations
+
+What the STA tool does?
+
+  1) Takes in the synthesized netlist (.v) file
+  2) Takes in the constraints (.sdc) file
+  3) Takes in the configurations (.json) file
+  4) Takes in the run script (.tcl) file
+
+
+
+Notes : 
+
+  (this is pre layout sta, so no real clocks)
+  after rc extraction, the values in /home/amrut/OpenLane/designs/half_adder_scan/runs/RUN_2026.02.01_16.39.58/reports/cts will change in the summary rpt
+  
+  (this is post layout sta, so we get changes in values in the summary rpt)
+  For post rc extraction, the values in /home/amrut/OpenLane/designs/half_adder_scan/runs/RUN_2026.02.01_16.39.58/reports/signoff will change in the summary rpt
+  
+  
+  If .sdc file is not given, it uses a base.sdc from /scripts folder /home/amrut/OpenLane/scripts
+  
+  for your own sdc, first make /mydesign, then in that dir, make a mysdc.sdc, myconfig.json, make /src, put design rtl in that
+
+
+Regarding Technology Library?
+
+  sky130_fd_sc_hd: High Density digital standard cells (the most common library).
+  sky130_fd_sc_hdll: High Density Low Leakage digital standard cells (lower leakage power than HD).
+  sky130_fd_sc_hs: High Speed digital standard cells.
+  sky130_fd_sc_ls: Low Speed digital standard cells.
+  sky130_fd_sc_ms: Medium Speed digital standard cells
+    
