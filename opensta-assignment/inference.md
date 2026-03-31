@@ -19,7 +19,7 @@ The SDC (Synopsys Design Constraints) file is the bridge between the design inte
   In the real world, clock edges are never perfectly sharp or perfectly on time (due to jitter and skew). This command adds a pessimistic "safety margin." The tool will artificially subtract 0.2ns from your setup required time and add 0.1ns to the hold required time to ensure the chip works even with imperfect clocks.
 
 * **`path from FF1 to FF2 is multicycle = 2` (`set_multicycle_path`)**
-  By default, data launched by FF1 on clock edge 1 must be captured by FF2 on clock edge 2 (a 1-cycle window). This command relaxes that rule. It tells the tool: "The combinational logic $Y=(A\ \&\ B)\ |\ C$ is complex. Give it 2 full clock cycles (20ns) to resolve before checking setup timing."
+  By default, data launched by FF1 on clock edge 1 must be captured by FF2 on clock edge 2 (a 1-cycle window). This command relaxes that rule. It tells the tool: "The combinational logic Y=(A&B)|C is complex. Give it 2 full clock cycles (20ns) to resolve before checking setup timing."
 
 
   ### Effect of Increasing Input Delay on Slack
