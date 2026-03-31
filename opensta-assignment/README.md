@@ -6,19 +6,18 @@ This repository contains the setup, configuration, and constraints required to r
 
 To run this custom design, the directory structure must be set up correctly within the OpenLane `designs` folder:
 
-```text
-/home/amrut/OpenLane/designs/mydesign/
-│
-├── myconfig.json      # The main OpenLane configuration file
-├── mysdc.sdc          # Custom timing constraints for STA
-└── src/
-    └── design.v       # The Verilog RTL source code
 
-```bash
+    /home/amrut/OpenLane/designs/mydesign/
+    │
+    ├── myconfig.json      # The main OpenLane configuration file
+    ├── mysdc.sdc          # Custom timing constraints for STA
+    └── src/
+        └── design.v       # The Verilog RTL source code
 
-cd ~/OpenLane
-make mount
-./flow.tcl -design mydesign -config_file designs/mydesign/myconfig.json
+
+    cd ~/OpenLane
+    make mount
+    ./flow.tcl -design mydesign -config_file designs/mydesign/myconfig.json
 
 
 ---
