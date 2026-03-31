@@ -2,7 +2,7 @@
 
 This document summarizes the Static Timing Analysis (STA) results across three different SDC constraint configurations. The analysis compares **Pre-Layout (Synthesis)** and **Post-Layout (RC Extraction)** timing metrics to observe the physical impact of routing and constraint modification.
 
-## 1. Master Comparison Table: Setup & Hold Slack
+## 1. Comparison Table: Setup & Hold Slack
 The table below tracks the timing slack (in nanoseconds) for the critical paths across our baseline run and the modified constraint runs.
 
 | Path (Start → End) | Check Type | Analysis Phase |  Baseline Slack |  High Input Delay |  No Multicycle Relaxation |
@@ -28,8 +28,7 @@ The table below tracks the timing slack (in nanoseconds) for the critical paths 
 
 ## 2. Experimental Observations & Analysis
 
-Based on the data extracted from the OpenLane OpenSTA reports, we can definitively answer the effects of altering the SDC constraints:
-
+Based on the data extracted from the OpenLane OpenSTA reports, 
 ### Observation A: Pre-Layout vs. Post-Layout Reality
 Across all configurations, the timing metrics shifted between the Pre-Layout (Synthesis) and Post-Layout (RC Extraction) phases. 
 * **Setup Slack on Output Paths Decreased:** The slack on the `_1_ → OUTB` path dropped from `6.53ns` to `6.22ns`. This reflects the real-world parasitic capacitance and resistance added by the metal routing.
@@ -45,5 +44,4 @@ The baseline design included a `set_multicycle_path -setup 2` constraint between
 * **Effect:** Removing this constraint forces the STA tool to evaluate the path in a strict 1-cycle (10ns) window. 
 * **Conclusion:** The Setup Slack for that specific internal path drops drastically by exactly one clock period (10.0ns). If the logic delay exceeds the new tighter boundary, this will immediately trigger a critical setup timing violation.
 
----
-*Generated via OpenLane / SkyWater 130nm PDK OpenSTA flow.*
+
