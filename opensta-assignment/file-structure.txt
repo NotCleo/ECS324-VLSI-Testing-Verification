@@ -1,0 +1,619 @@
+amrut@Maverick:~/OpenLane/designs/mydesign$ tree
+.
+├── myconfig.json
+├── mysdc.sdc
+├── runs
+│   ├── RUN_2026.03.31_05.44.51
+│   ├── RUN_2026.03.31_05.46.17
+│   │   ├── cmds.log
+│   │   ├── config_in.tcl
+│   │   ├── config.tcl
+│   │   ├── errors.log
+│   │   ├── issue_reproducible
+│   │   │   ├── env.gdb
+│   │   │   ├── env.lldb
+│   │   │   ├── openlane
+│   │   │   │   └── scripts
+│   │   │   │       └── openroad
+│   │   │   │           ├── common
+│   │   │   │           │   ├── io.tcl
+│   │   │   │           │   ├── pdn_cfg.tcl
+│   │   │   │           │   └── set_global_connections.tcl
+│   │   │   │           └── pdn.tcl
+│   │   │   ├── pdk
+│   │   │   │   └── sky130A
+│   │   │   │       └── libs.ref
+│   │   │   │           └── sky130_fd_sc_hd
+│   │   │   │               └── lib
+│   │   │   │                   └── sky130_fd_sc_hd__tt_025C_1v80.lib
+│   │   │   ├── results
+│   │   │   │   ├── floorplan
+│   │   │   │   └── synthesis
+│   │   │   │       └── my_design.v
+│   │   │   ├── run.sh
+│   │   │   ├── run.tcl
+│   │   │   └── tmp
+│   │   │       ├── floorplan
+│   │   │       │   ├── 3-initial_fp.sdc
+│   │   │       │   ├── 5-tapcell.def
+│   │   │       │   └── 5-tapcell.odb
+│   │   │       └── merged.nom.lef
+│   │   ├── logs
+│   │   │   ├── cts
+│   │   │   ├── floorplan
+│   │   │   │   ├── 3-initial_fp.errors
+│   │   │   │   ├── 3-initial_fp.log
+│   │   │   │   ├── 3-initial_fp.warnings
+│   │   │   │   ├── 4-io.errors
+│   │   │   │   ├── 4-io.log
+│   │   │   │   ├── 4-io.warnings
+│   │   │   │   ├── 5-tap.errors
+│   │   │   │   ├── 5-tap.log
+│   │   │   │   ├── 5-tap.warnings
+│   │   │   │   ├── 6-pdn.errors
+│   │   │   │   ├── 6-pdn.log
+│   │   │   │   └── 6-pdn.warnings
+│   │   │   ├── placement
+│   │   │   ├── routing
+│   │   │   ├── signoff
+│   │   │   └── synthesis
+│   │   │       ├── 1-synthesis.errors
+│   │   │       ├── 1-synthesis.log
+│   │   │       ├── 1-synthesis.warnings
+│   │   │       ├── 2-sta.errors
+│   │   │       ├── 2-sta.log
+│   │   │       ├── 2-sta.warnings
+│   │   │       └── linter.log
+│   │   ├── OPENLANE_COMMIT
+│   │   ├── openlane.log
+│   │   ├── PDK_SOURCES
+│   │   ├── reports
+│   │   │   ├── cts
+│   │   │   ├── floorplan
+│   │   │   │   ├── 3-initial_fp_core_area.rpt
+│   │   │   │   └── 3-initial_fp_die_area.rpt
+│   │   │   ├── manufacturability.rpt
+│   │   │   ├── metrics.csv
+│   │   │   ├── placement
+│   │   │   ├── routing
+│   │   │   ├── signoff
+│   │   │   └── synthesis
+│   │   │       ├── 1-synthesis.AREA_0.chk.rpt
+│   │   │       ├── 1-synthesis.AREA_0.stat.rpt
+│   │   │       ├── 1-synthesis_dff.stat
+│   │   │       ├── 1-synthesis_pre.stat
+│   │   │       ├── 1-synthesis_pre_synth.chk.rpt
+│   │   │       ├── 2-syn_sta.checks.rpt
+│   │   │       ├── 2-syn_sta.max.rpt
+│   │   │       ├── 2-syn_sta.min.rpt
+│   │   │       ├── 2-syn_sta.power.rpt
+│   │   │       ├── 2-syn_sta.skew.rpt
+│   │   │       └── 2-syn_sta.summary.rpt
+│   │   ├── results
+│   │   │   ├── cts
+│   │   │   ├── final
+│   │   │   │   ├── def
+│   │   │   │   │   └── my_design.def
+│   │   │   │   ├── gds
+│   │   │   │   ├── lef
+│   │   │   │   ├── lib
+│   │   │   │   ├── mag
+│   │   │   │   ├── maglef
+│   │   │   │   ├── sdc
+│   │   │   │   │   └── my_design.sdc
+│   │   │   │   ├── sdf
+│   │   │   │   │   └── my_design.sdf
+│   │   │   │   ├── spi
+│   │   │   │   │   └── lvs
+│   │   │   │   └── verilog
+│   │   │   │       └── gl
+│   │   │   │           └── my_design.nl.v
+│   │   │   ├── floorplan
+│   │   │   ├── placement
+│   │   │   ├── routing
+│   │   │   ├── signoff
+│   │   │   └── synthesis
+│   │   │       ├── my_design.sdf
+│   │   │       └── my_design.v
+│   │   ├── runtime.yaml
+│   │   ├── tmp
+│   │   │   ├── cts
+│   │   │   │   ├── cts-fastest.lib
+│   │   │   │   ├── cts-fastest.lib.exclude.list
+│   │   │   │   ├── cts.lib
+│   │   │   │   ├── cts.lib.exclude.list
+│   │   │   │   ├── cts-slowest.lib
+│   │   │   │   └── cts-slowest.lib.exclude.list
+│   │   │   ├── dimensions.txt
+│   │   │   ├── floorplan
+│   │   │   │   ├── 3-initial_fp.def
+│   │   │   │   ├── 3-initial_fp.odb
+│   │   │   │   ├── 3-initial_fp.sdc
+│   │   │   │   ├── 3-minimized_pdn.txt
+│   │   │   │   ├── 4-io.def
+│   │   │   │   ├── 4-io.odb
+│   │   │   │   ├── 5-tapcell.def
+│   │   │   │   └── 5-tapcell.odb
+│   │   │   ├── layers.list
+│   │   │   ├── merged.max.lef
+│   │   │   ├── merged.min.lef
+│   │   │   ├── merged.nom.lef
+│   │   │   ├── placement
+│   │   │   ├── routing
+│   │   │   │   └── config.tracks
+│   │   │   ├── signoff
+│   │   │   └── synthesis
+│   │   │       ├── 1-sky130_fd_sc_hd__tt_025C_1v80.no_pg.lib
+│   │   │       ├── 1-trimmed.no_pg.lib
+│   │   │       ├── hierarchy.dot
+│   │   │       ├── merged.lib
+│   │   │       ├── post_techmap.dot
+│   │   │       ├── synthesis.sdc
+│   │   │       ├── trimmed.lib
+│   │   │       └── trimmed.lib.exclude.list
+│   │   └── warnings.log
+│   └── RUN_2026.03.31_05.48.22
+│       ├── cmds.log
+│       ├── config_in.tcl
+│       ├── config.tcl
+│       ├── logs
+│       │   ├── cts
+│       │   │   ├── 12-cts.errors
+│       │   │   ├── 12-cts.log
+│       │   │   ├── 12-cts.warnings
+│       │   │   ├── 13-cts_sta.errors
+│       │   │   ├── 13-cts_sta.log
+│       │   │   ├── 13-cts_sta.warnings
+│       │   │   ├── 14-resizer.errors
+│       │   │   ├── 14-resizer.log
+│       │   │   └── 14-resizer.warnings
+│       │   ├── floorplan
+│       │   │   ├── 3-initial_fp.errors
+│       │   │   ├── 3-initial_fp.log
+│       │   │   ├── 3-initial_fp.warnings
+│       │   │   ├── 4-io.errors
+│       │   │   ├── 4-io.log
+│       │   │   ├── 4-io.warnings
+│       │   │   ├── 5-tap.errors
+│       │   │   ├── 5-tap.log
+│       │   │   ├── 5-tap.warnings
+│       │   │   ├── 6-pdn.errors
+│       │   │   ├── 6-pdn.log
+│       │   │   └── 6-pdn.warnings
+│       │   ├── placement
+│       │   │   ├── 10-detailed.errors
+│       │   │   ├── 10-detailed.log
+│       │   │   ├── 10-detailed.warnings
+│       │   │   ├── 11-dpl_sta.errors
+│       │   │   ├── 11-dpl_sta.log
+│       │   │   ├── 11-dpl_sta.warnings
+│       │   │   ├── 7-global.errors
+│       │   │   ├── 7-global.log
+│       │   │   ├── 7-global.warnings
+│       │   │   ├── 8-gpl_sta.errors
+│       │   │   ├── 8-gpl_sta.log
+│       │   │   ├── 8-gpl_sta.warnings
+│       │   │   ├── 9-resizer.errors
+│       │   │   ├── 9-resizer.log
+│       │   │   └── 9-resizer.warnings
+│       │   ├── routing
+│       │   │   ├── 15-resizer_design.errors
+│       │   │   ├── 15-resizer_design.log
+│       │   │   ├── 15-resizer_design.warnings
+│       │   │   ├── 16-rsz_design_sta.errors
+│       │   │   ├── 16-rsz_design_sta.log
+│       │   │   ├── 16-rsz_design_sta.warnings
+│       │   │   ├── 17-resizer_timing.errors
+│       │   │   ├── 17-resizer_timing.log
+│       │   │   ├── 17-resizer_timing.warnings
+│       │   │   ├── 18-rsz_timing_sta.errors
+│       │   │   ├── 18-rsz_timing_sta.log
+│       │   │   ├── 18-rsz_timing_sta.warnings
+│       │   │   ├── 19-global.errors
+│       │   │   ├── 19-global.log
+│       │   │   ├── 19-global.warnings
+│       │   │   ├── 19-global_write_netlist.errors
+│       │   │   ├── 19-global_write_netlist.log
+│       │   │   ├── 19-global_write_netlist.warnings
+│       │   │   ├── 21-grt_sta.errors
+│       │   │   ├── 21-grt_sta.log
+│       │   │   ├── 21-grt_sta.warnings
+│       │   │   ├── 22-fill.errors
+│       │   │   ├── 22-fill.log
+│       │   │   ├── 22-fill.warnings
+│       │   │   ├── 23-detailed.errors
+│       │   │   ├── 23-detailed.log
+│       │   │   ├── 23-detailed.warnings
+│       │   │   └── 24-wire_lengths.log
+│       │   ├── signoff
+│       │   │   ├── 25-parasitics_extraction.min.errors
+│       │   │   ├── 25-parasitics_extraction.min.log
+│       │   │   ├── 25-parasitics_extraction.min.warnings
+│       │   │   ├── 26-rcx_mcsta.min.errors
+│       │   │   ├── 26-rcx_mcsta.min.log
+│       │   │   ├── 26-rcx_mcsta.min.warnings
+│       │   │   ├── 27-parasitics_extraction.max.errors
+│       │   │   ├── 27-parasitics_extraction.max.log
+│       │   │   ├── 27-parasitics_extraction.max.warnings
+│       │   │   ├── 28-rcx_mcsta.max.errors
+│       │   │   ├── 28-rcx_mcsta.max.log
+│       │   │   ├── 28-rcx_mcsta.max.warnings
+│       │   │   ├── 29-parasitics_extraction.nom.errors
+│       │   │   ├── 29-parasitics_extraction.nom.log
+│       │   │   ├── 29-parasitics_extraction.nom.warnings
+│       │   │   ├── 30-rcx_mcsta.nom.errors
+│       │   │   ├── 30-rcx_mcsta.nom.log
+│       │   │   ├── 30-rcx_mcsta.nom.warnings
+│       │   │   ├── 31-rcx_sta.errors
+│       │   │   ├── 31-rcx_sta.log
+│       │   │   ├── 31-rcx_sta.warnings
+│       │   │   ├── 32-irdrop.errors
+│       │   │   ├── 32-irdrop.log
+│       │   │   ├── 32-irdrop.warnings
+│       │   │   ├── 33-gdsii.errors
+│       │   │   ├── 33-gdsii.log
+│       │   │   ├── 33-gdsii.warnings
+│       │   │   ├── 33-gds_ptrs.errors
+│       │   │   ├── 33-gds_ptrs.log
+│       │   │   ├── 33-gds_ptrs.warnings
+│       │   │   ├── 33-lef.errors
+│       │   │   ├── 33-lef.log
+│       │   │   ├── 33-lef.warnings
+│       │   │   ├── 33-maglef.errors
+│       │   │   ├── 33-maglef.log
+│       │   │   ├── 33-maglef.warnings
+│       │   │   ├── 34-gdsii-klayout.log
+│       │   │   ├── 35-xor.log
+│       │   │   ├── 36-spice.errors
+│       │   │   ├── 36-spice.log
+│       │   │   ├── 36-spice.warnings
+│       │   │   ├── 37-write_powered_def.log
+│       │   │   ├── 37-write_powered_verilog.errors
+│       │   │   ├── 37-write_powered_verilog.log
+│       │   │   ├── 37-write_powered_verilog.warnings
+│       │   │   ├── 39-lvs.lef.log
+│       │   │   ├── 39-my_design.lef.lvs.json
+│       │   │   ├── 39-my_design.lef.lvs.log
+│       │   │   ├── 40-drc.errors
+│       │   │   ├── 40-drc.log
+│       │   │   ├── 40-drc.warnings
+│       │   │   ├── 41-arc.errors
+│       │   │   ├── 41-arc.log
+│       │   │   ├── 41-arc.warnings
+│       │   │   └── 42-erc_screen.log
+│       │   └── synthesis
+│       │       ├── 1-synthesis.errors
+│       │       ├── 1-synthesis.log
+│       │       ├── 1-synthesis.warnings
+│       │       ├── 2-sta.errors
+│       │       ├── 2-sta.log
+│       │       ├── 2-sta.warnings
+│       │       └── linter.log
+│       ├── OPENLANE_COMMIT
+│       ├── openlane.log
+│       ├── PDK_SOURCES
+│       ├── reports
+│       │   ├── cts
+│       │   │   ├── 13-cts_sta.checks.rpt
+│       │   │   ├── 13-cts_sta.max.rpt
+│       │   │   ├── 13-cts_sta.min.rpt
+│       │   │   ├── 13-cts_sta.power.rpt
+│       │   │   ├── 13-cts_sta.skew.rpt
+│       │   │   └── 13-cts_sta.summary.rpt
+│       │   ├── floorplan
+│       │   │   ├── 3-initial_fp_core_area.rpt
+│       │   │   └── 3-initial_fp_die_area.rpt
+│       │   ├── manufacturability.rpt
+│       │   ├── metrics.csv
+│       │   ├── placement
+│       │   │   ├── 11-dpl_sta.checks.rpt
+│       │   │   ├── 11-dpl_sta.max.rpt
+│       │   │   ├── 11-dpl_sta.min.rpt
+│       │   │   ├── 11-dpl_sta.power.rpt
+│       │   │   ├── 11-dpl_sta.skew.rpt
+│       │   │   ├── 11-dpl_sta.summary.rpt
+│       │   │   ├── 8-gpl_sta.checks.rpt
+│       │   │   ├── 8-gpl_sta.max.rpt
+│       │   │   ├── 8-gpl_sta.min.rpt
+│       │   │   ├── 8-gpl_sta.power.rpt
+│       │   │   ├── 8-gpl_sta.skew.rpt
+│       │   │   └── 8-gpl_sta.summary.rpt
+│       │   ├── routing
+│       │   │   ├── 16-rsz_design_sta.checks.rpt
+│       │   │   ├── 16-rsz_design_sta.max.rpt
+│       │   │   ├── 16-rsz_design_sta.min.rpt
+│       │   │   ├── 16-rsz_design_sta.power.rpt
+│       │   │   ├── 16-rsz_design_sta.skew.rpt
+│       │   │   ├── 16-rsz_design_sta.summary.rpt
+│       │   │   ├── 18-rsz_timing_sta.checks.rpt
+│       │   │   ├── 18-rsz_timing_sta.max.rpt
+│       │   │   ├── 18-rsz_timing_sta.min.rpt
+│       │   │   ├── 18-rsz_timing_sta.power.rpt
+│       │   │   ├── 18-rsz_timing_sta.skew.rpt
+│       │   │   ├── 18-rsz_timing_sta.summary.rpt
+│       │   │   ├── 21-grt_sta.checks.rpt
+│       │   │   ├── 21-grt_sta.max.rpt
+│       │   │   ├── 21-grt_sta.min.rpt
+│       │   │   ├── 21-grt_sta.power.rpt
+│       │   │   ├── 21-grt_sta.skew.rpt
+│       │   │   ├── 21-grt_sta.summary.rpt
+│       │   │   ├── 24-wire_lengths.csv
+│       │   │   ├── drt.drc
+│       │   │   └── drt.klayout.xml
+│       │   ├── signoff
+│       │   │   ├── 26-mca
+│       │   │   │   ├── rcx_min_sta.checks.rpt
+│       │   │   │   ├── rcx_min_sta.max.rpt
+│       │   │   │   ├── rcx_min_sta.min.rpt
+│       │   │   │   ├── rcx_min_sta.power.rpt
+│       │   │   │   ├── rcx_min_sta.skew.rpt
+│       │   │   │   └── rcx_min_sta.summary.rpt
+│       │   │   ├── 28-mca
+│       │   │   │   ├── rcx_max_sta.checks.rpt
+│       │   │   │   ├── rcx_max_sta.max.rpt
+│       │   │   │   ├── rcx_max_sta.min.rpt
+│       │   │   │   ├── rcx_max_sta.power.rpt
+│       │   │   │   ├── rcx_max_sta.skew.rpt
+│       │   │   │   └── rcx_max_sta.summary.rpt
+│       │   │   ├── 30-mca
+│       │   │   │   ├── rcx_nom_sta.checks.rpt
+│       │   │   │   ├── rcx_nom_sta.max.rpt
+│       │   │   │   ├── rcx_nom_sta.min.rpt
+│       │   │   │   ├── rcx_nom_sta.power.rpt
+│       │   │   │   ├── rcx_nom_sta.skew.rpt
+│       │   │   │   └── rcx_nom_sta.summary.rpt
+│       │   │   ├── 31-rcx_sta.checks.rpt
+│       │   │   ├── 31-rcx_sta.max.rpt
+│       │   │   ├── 31-rcx_sta.min.rpt
+│       │   │   ├── 31-rcx_sta.power.rpt
+│       │   │   ├── 31-rcx_sta.skew.rpt
+│       │   │   ├── 31-rcx_sta.summary.rpt
+│       │   │   ├── 32-irdrop-VGND.rpt
+│       │   │   ├── 32-irdrop-VPWR.rpt
+│       │   │   ├── 35-xor.rpt
+│       │   │   ├── 35-xor.xml
+│       │   │   ├── 39-my_design.lvs.rpt
+│       │   │   ├── 41-antenna_violators_pins.txt
+│       │   │   ├── 41-antenna_violators.rpt
+│       │   │   ├── drc.klayout.xml
+│       │   │   ├── drc.rdb
+│       │   │   ├── drc.rpt
+│       │   │   ├── drc.tcl
+│       │   │   ├── drc.tr
+│       │   │   ├── my_design.rpt
+│       │   │   ├── my_design.rpt.debug.gz
+│       │   │   ├── my_design.rpt.error.gz
+│       │   │   └── spice.feedback.txt
+│       │   └── synthesis
+│       │       ├── 1-synthesis.AREA_0.chk.rpt
+│       │       ├── 1-synthesis.AREA_0.stat.rpt
+│       │       ├── 1-synthesis_dff.stat
+│       │       ├── 1-synthesis_pre.stat
+│       │       ├── 1-synthesis_pre_synth.chk.rpt
+│       │       ├── 2-syn_sta.checks.rpt
+│       │       ├── 2-syn_sta.max.rpt
+│       │       ├── 2-syn_sta.min.rpt
+│       │       ├── 2-syn_sta.power.rpt
+│       │       ├── 2-syn_sta.skew.rpt
+│       │       └── 2-syn_sta.summary.rpt
+│       ├── results
+│       │   ├── cts
+│       │   │   ├── my_design.def
+│       │   │   ├── my_design.odb
+│       │   │   └── my_design.sdc
+│       │   ├── final
+│       │   │   ├── def
+│       │   │   │   └── my_design.def
+│       │   │   ├── gds
+│       │   │   │   └── my_design.gds
+│       │   │   ├── lef
+│       │   │   │   └── my_design.lef
+│       │   │   ├── lib
+│       │   │   │   └── my_design.lib
+│       │   │   ├── mag
+│       │   │   │   └── my_design.mag
+│       │   │   ├── maglef
+│       │   │   │   └── my_design.mag
+│       │   │   ├── sdc
+│       │   │   │   └── my_design.sdc
+│       │   │   ├── sdf
+│       │   │   │   ├── multicorner
+│       │   │   │   │   ├── max
+│       │   │   │   │   │   ├── my_design.Fastest.sdf
+│       │   │   │   │   │   ├── my_design.Slowest.sdf
+│       │   │   │   │   │   └── my_design.Typical.sdf
+│       │   │   │   │   ├── min
+│       │   │   │   │   │   ├── my_design.Fastest.sdf
+│       │   │   │   │   │   ├── my_design.Slowest.sdf
+│       │   │   │   │   │   └── my_design.Typical.sdf
+│       │   │   │   │   └── nom
+│       │   │   │   │       ├── my_design.Fastest.sdf
+│       │   │   │   │       ├── my_design.Slowest.sdf
+│       │   │   │   │       └── my_design.Typical.sdf
+│       │   │   │   └── my_design.sdf
+│       │   │   ├── spef
+│       │   │   │   ├── multicorner
+│       │   │   │   │   ├── my_design.max.spef
+│       │   │   │   │   ├── my_design.min.spef
+│       │   │   │   │   └── my_design.nom.spef
+│       │   │   │   └── my_design.spef
+│       │   │   ├── spi
+│       │   │   │   └── lvs
+│       │   │   │       └── my_design.spice
+│       │   │   └── verilog
+│       │   │       └── gl
+│       │   │           ├── my_design.nl.v
+│       │   │           └── my_design.v
+│       │   ├── floorplan
+│       │   │   ├── my_design.def
+│       │   │   └── my_design.odb
+│       │   ├── placement
+│       │   │   ├── my_design.def
+│       │   │   ├── my_design.nl.v
+│       │   │   ├── my_design.odb
+│       │   │   └── my_design.pnl.v
+│       │   ├── routing
+│       │   │   ├── mca
+│       │   │   │   ├── process_corner_max
+│       │   │   │   │   ├── my_design.Fastest.lib
+│       │   │   │   │   ├── my_design.Fastest.sdf
+│       │   │   │   │   ├── my_design.Slowest.lib
+│       │   │   │   │   ├── my_design.Slowest.sdf
+│       │   │   │   │   ├── my_design.spef
+│       │   │   │   │   ├── my_design.Typical.lib
+│       │   │   │   │   └── my_design.Typical.sdf
+│       │   │   │   ├── process_corner_min
+│       │   │   │   │   ├── my_design.Fastest.lib
+│       │   │   │   │   ├── my_design.Fastest.sdf
+│       │   │   │   │   ├── my_design.Slowest.lib
+│       │   │   │   │   ├── my_design.Slowest.sdf
+│       │   │   │   │   ├── my_design.spef
+│       │   │   │   │   ├── my_design.Typical.lib
+│       │   │   │   │   └── my_design.Typical.sdf
+│       │   │   │   ├── process_corner_nom
+│       │   │   │   │   ├── my_design.Fastest.lib
+│       │   │   │   │   ├── my_design.Fastest.sdf
+│       │   │   │   │   ├── my_design.lib
+│       │   │   │   │   ├── my_design.sdf
+│       │   │   │   │   ├── my_design.Slowest.lib
+│       │   │   │   │   ├── my_design.Slowest.sdf
+│       │   │   │   │   ├── my_design.spef
+│       │   │   │   │   ├── my_design.Typical.lib
+│       │   │   │   │   └── my_design.Typical.sdf
+│       │   │   │   ├── sdf
+│       │   │   │   │   ├── max
+│       │   │   │   │   │   ├── my_design.Fastest.sdf
+│       │   │   │   │   │   ├── my_design.Slowest.sdf
+│       │   │   │   │   │   └── my_design.Typical.sdf
+│       │   │   │   │   ├── min
+│       │   │   │   │   │   ├── my_design.Fastest.sdf
+│       │   │   │   │   │   ├── my_design.Slowest.sdf
+│       │   │   │   │   │   └── my_design.Typical.sdf
+│       │   │   │   │   └── nom
+│       │   │   │   │       ├── my_design.Fastest.sdf
+│       │   │   │   │       ├── my_design.Slowest.sdf
+│       │   │   │   │       └── my_design.Typical.sdf
+│       │   │   │   └── spef
+│       │   │   │       ├── my_design.max.spef
+│       │   │   │       ├── my_design.min.spef
+│       │   │   │       └── my_design.nom.spef
+│       │   │   ├── my_design.def
+│       │   │   ├── my_design.nl.v
+│       │   │   ├── my_design.odb
+│       │   │   └── my_design.pnl.v
+│       │   ├── signoff
+│       │   │   ├── my_design.drc.mag
+│       │   │   ├── my_design.gds
+│       │   │   ├── my_design.klayout.gds
+│       │   │   ├── my_design.lef
+│       │   │   ├── my_design.lef.mag
+│       │   │   ├── my_design.lef.spice
+│       │   │   ├── my_design.lib
+│       │   │   ├── my_design.lyp
+│       │   │   ├── my_design.mag
+│       │   │   ├── my_design.magic.gds
+│       │   │   ├── my_design.sdf
+│       │   │   └── my_design.spice
+│       │   └── synthesis
+│       │       ├── my_design.sdf
+│       │       └── my_design.v
+│       ├── runtime.yaml
+│       ├── tmp
+│       │   ├── 15-my_design.def
+│       │   ├── 15-my_design.nl.v
+│       │   ├── 15-my_design.odb
+│       │   ├── 15-my_design.pnl.v
+│       │   ├── 15-my_design.sdc
+│       │   ├── 17-my_design.def
+│       │   ├── 17-my_design.nl.v
+│       │   ├── 17-my_design.odb
+│       │   ├── 17-my_design.pnl.v
+│       │   ├── 17-my_design.sdc
+│       │   ├── cts
+│       │   │   ├── 14-my_design.resized.def
+│       │   │   ├── 14-my_design.resized.nl.v
+│       │   │   ├── 14-my_design.resized.odb
+│       │   │   ├── 14-my_design.resized.pnl.v
+│       │   │   ├── 14-my_design.resized.sdc
+│       │   │   ├── cts-fastest.lib
+│       │   │   ├── cts-fastest.lib.exclude.list
+│       │   │   ├── cts.lib
+│       │   │   ├── cts.lib.exclude.list
+│       │   │   ├── cts-slowest.lib
+│       │   │   └── cts-slowest.lib.exclude.list
+│       │   ├── dimensions.txt
+│       │   ├── floorplan
+│       │   │   ├── 3-initial_fp.def
+│       │   │   ├── 3-initial_fp.odb
+│       │   │   ├── 3-initial_fp.sdc
+│       │   │   ├── 3-minimized_pdn.txt
+│       │   │   ├── 4-io.def
+│       │   │   ├── 4-io.odb
+│       │   │   ├── 5-tapcell.def
+│       │   │   └── 5-tapcell.odb
+│       │   ├── layers.list
+│       │   ├── merged.max.lef
+│       │   ├── merged.min.lef
+│       │   ├── merged.nom.lef
+│       │   ├── placement
+│       │   │   ├── 7-global.def
+│       │   │   ├── 7-global.nl.v
+│       │   │   ├── 7-global.odb
+│       │   │   ├── 7-global.pnl.v
+│       │   │   ├── 9-resizer.def
+│       │   │   ├── 9-resizer.nl.v
+│       │   │   ├── 9-resizer.odb
+│       │   │   ├── 9-resizer.pnl.v
+│       │   │   └── 9-resizer.sdc
+│       │   ├── routing
+│       │   │   ├── 19-global.def
+│       │   │   ├── 19-global.guide
+│       │   │   ├── 19-global.odb
+│       │   │   ├── 22-fill.def
+│       │   │   ├── 22-fill.nl.v
+│       │   │   ├── 22-fill.odb
+│       │   │   ├── 22-fill.pnl.v
+│       │   │   ├── config.tracks
+│       │   │   ├── global.nl.v
+│       │   │   ├── global.pnl.v
+│       │   │   ├── groute-congestion.rpt
+│       │   │   ├── resizer-routing-design-congestion.rpt
+│       │   │   └── resizer-routing-timing-congestion.rpt
+│       │   ├── signoff
+│       │   │   ├── 36-my_design.nl.v
+│       │   │   ├── 36-my_design.p.def
+│       │   │   ├── 36-my_design.pnl.v
+│       │   │   ├── 39-setup_file.lef.lvs
+│       │   │   ├── gds_ptrs.mag
+│       │   │   ├── magic_spice_ext
+│       │   │   │   ├── my_design.ext
+│       │   │   │   ├── sky130_ef_sc_hd__decap_12.ext
+│       │   │   │   ├── sky130_fd_sc_hd__a21o_1.ext
+│       │   │   │   ├── sky130_fd_sc_hd__buf_1.ext
+│       │   │   │   ├── sky130_fd_sc_hd__clkbuf_16.ext
+│       │   │   │   ├── sky130_fd_sc_hd__clkbuf_1.ext
+│       │   │   │   ├── sky130_fd_sc_hd__decap_3.ext
+│       │   │   │   ├── sky130_fd_sc_hd__decap_4.ext
+│       │   │   │   ├── sky130_fd_sc_hd__decap_8.ext
+│       │   │   │   ├── sky130_fd_sc_hd__dfxtp_1.ext
+│       │   │   │   ├── sky130_fd_sc_hd__fill_1.ext
+│       │   │   │   ├── sky130_fd_sc_hd__fill_2.ext
+│       │   │   │   └── sky130_fd_sc_hd__tapvpwrvgnd_1.ext
+│       │   │   ├── my_design.cdl
+│       │   │   └── my_design.power
+│       │   └── synthesis
+│       │       ├── 1-sky130_fd_sc_hd__tt_025C_1v80.no_pg.lib
+│       │       ├── 1-trimmed.no_pg.lib
+│       │       ├── hierarchy.dot
+│       │       ├── merged.lib
+│       │       ├── post_techmap.dot
+│       │       ├── synthesis.sdc
+│       │       ├── trimmed.lib
+│       │       └── trimmed.lib.exclude.list
+│       └── warnings.log
+└── src
+    └── design.v
+
+122 directories, 492 files
+amrut@Maverick:~/OpenLane/designs/mydesign$ 
+
