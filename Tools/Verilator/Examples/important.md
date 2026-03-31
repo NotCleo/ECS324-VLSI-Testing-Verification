@@ -37,21 +37,13 @@ Verilator is notoriously strict, making it an excellent tool to enforce the goal
 ### Example: Linting a faulty design
 To run the linter on a file (e.g., `rtl-with-error.v`) to catch width mismatches without compiling it into C++:
 
-```bash
 verilator --lint-only -Wall rtl-with-error.v
 
-%Warning-WIDTHEXPAND: lint_test.v:20:22: Operator ASSIGNDLY expects 16 bits on the Assign RHS, but Assign RHS's VARREF 'intermediate' generates 8 bits.
-                                       : ... note: In instance 'lint_test'
-   20 |             data_out <= intermediate; 
-      |                      ^~
-                      ... For warning description see [https://verilator.org/warn/WIDTHEXPAND?v=5.020](https://verilator.org/warn/WIDTHEXPAND?v=5.020)
-                      ... Use "/* verilator lint_off WIDTHEXPAND */" and lint_on around source to disable this message.
-%Error: Exiting due to 1 warning(s)
+
+---
 
 
-
-
-3. The Most Useful Flags
+## 3. The Most Useful Flags
 
 While verilator -help lists hundreds of options, these are the core flags you will use on a daily basis.
 Linting & Warnings
@@ -99,20 +91,20 @@ Simulation & Tracing
     -D<var>=<value> : Passes a preprocessor macro to the Verilog code (e.g., -DDEBUG_MODE=1).
 
 
+    
+    verilator --lint-only -Wall src/my_module.sv
+    
+    verilator --cc --exe --build -j 4 -Wall --top-module my_top src/*.v tb_main.cpp
+    
+    verilator --cc --exe --build -j 4 --trace-fst -Wall --top-module my_top_level src/*.v tb_main.cpp
+    
 
-verilator --lint-only -Wall src/my_module.sv
-
-verilator --cc --exe --build -j 4 -Wall --top-module my_top src/*.v tb_main.cpp
-
-verilator --cc --exe --build -j 4 --trace-fst -Wall --top-module my_top_level src/*.v tb_main.cpp
-
-
-verilator --cc --exe --build -j 8 --trace-fst --assert -Wall \
-
-    -I./includes \
-
-    -y ./ip_blocks \
-
-    --top-module system_top \
-
-    src/*.sv tb/tb_system.cpp
+    verilator --cc --exe --build -j 8 --trace-fst --assert -Wall \
+    
+        -I./includes \
+    
+        -y ./ip_blocks \
+    
+        --top-module system_top \
+    
+        src/*.sv tb/tb_system.cpp
