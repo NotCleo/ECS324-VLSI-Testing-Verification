@@ -1,3 +1,5 @@
+https://fpga-ignite.github.io/lab-materials/nguyen-slides.pdf
+
 # ECS324-VLSI-Testing-Verification
 
 (note to self : iverilog and gtkwave sits at ~/Documents (not to be confused with verilator))
