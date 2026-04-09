@@ -3,4 +3,37 @@ To take logarithms in verilog see the example :
   parameter RAM_DEPTH = 325;
   parameter ADDR_WIDTH = $clog2(RAM_DEPTH); // ADDR_WIDTH will be 9
 
-Saw this while dealing with barrel shifter
+Saw this while dealing with barrel shifter : 
+
+however while dealing with barrel shifter rtl, it was just a simple 8x8 barrel shifter with log2(8) = 3 control signals, but thats 8 case statements 
+what about a huge size array requiring shifting? can i go about writing so many case? bruh, so we need to make it parametrizable true but still how?
+
+`timescale 1ns / 1ps
+
+module circular_barrel_shifter #(
+    parameter N = 8,                // Data width
+    parameter S = $clog2(N)         // Shift amount width
+)(
+    input  wire [N-1:0] data_in,
+    input  wire [S-1:0] shift_amt,
+    input  wire         dir,        // 0 = Rotate Left, 1 = Rotate Right
+    output reg  [N-1:0] data_out
+);
+
+    always @(*) begin
+        // Bypass shifting if shift_amt is 0 to prevent (N-0) out-of-bounds warnings
+        if (shift_amt == 0) begin
+            data_out = data_in;
+        end else if (dir == 1'b0) begin
+            // Rotate Left: Shift left OR'ed with the bits falling off the top wrapped to the bottom
+            data_out = (data_in << shift_amt) | (data_in >> (N - shift_amt));
+        end else begin
+            // Rotate Right: Shift right OR'ed with the bits falling off the bottom wrapped to the top
+            data_out = (data_in >> shift_amt) | (data_in << (N - shift_amt));
+        end
+    end
+
+endmodule
+(note : not to be confused with << or >> as they pad in zeroes)
+
+
