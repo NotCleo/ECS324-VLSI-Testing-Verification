@@ -1,0 +1,6 @@
+To take logarithms in verilog see the example : 
+  
+  parameter RAM_DEPTH = 325;
+  parameter ADDR_WIDTH = $clog2(RAM_DEPTH); // ADDR_WIDTH will be 9
+
+Saw this while dealing with barrel shifter
